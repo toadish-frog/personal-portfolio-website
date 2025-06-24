@@ -40,16 +40,16 @@ export default function Home() {
 
       <div className="mt-10 lg:mt-28 text-center">
         <div className="font-serif text-center font-bold 
-        text-3xl sm:text-4xl md:text-5xl lg:text-6xl xl:text-7xl 
+        text-2xl sm:text-4xl md:text-5xl lg:text-6xl xl:text-7xl 
         text-stone-800
         dark:text-stone-300
         mb-6 sm:mb-8 md:mb-10 lg:mb-12 xl:mb-16 leading-tight">
-          An Archive of <br /> an <br /> Average Joe, <br /> I Guess
+          Had I not seen the Sun <br /> I could have borne the shade <br /> But Light a newer Wilderness <br /> My Wilderness has made
         </div>
 
       </div>
 
-      <div className="mt-8 lg:mb-8 mb-4 text-center ">
+      {/* <div className="mt-8 lg:mb-8 mb-4 text-center ">
         <div className="font-serif text-center font-bold 
         text-xl sm:text-2xl md:text-2xl lg:text-2xl xl:text-3xl 
         text-stone-800
@@ -57,7 +57,7 @@ export default function Home() {
         mb-4 sm:mb-6 md:mb-8 lg:mb-10 xl:mb-14 leading-tight">
           “您是一个有趣的人吗？” <br />“我觉得我是”
         </div>
-      </div>
+      </div> */}
 
 
       <div className="hidden w-screen h-px md:block bg-gradient-to-r from-zinc-300/0 via-zinc-300/50 to-zinc-300/0" />
