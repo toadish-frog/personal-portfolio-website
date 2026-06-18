@@ -12,10 +12,10 @@ export default function Page() {
         Blog
       </h1>
 
-      <p
+      {/* <p
         className="text-3xl leading-relaxed mt-2 w-fit font-bold mb-10 text-stone-800 dark:text-amber-50">
         「记忆的质料」
-      </p>
+      </p> */}
 
       <BlogPosts />
     </section>

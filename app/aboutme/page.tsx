@@ -10,10 +10,10 @@ export default function Page() {
             <AboutMe />
             <section className='divide-y divide-neutral-400 my-4 snap-start'>
                 <div className={`my-8 flex justify-center flex-col`}>
-                    <Education />
+                    <Experience />
                 </div>
                 <div className={`my-8 flex justify-center flex-col`}>
-                    <Experience />
+                    <Education />
                 </div>
                 <div className='my-8 flex justify-center flex-col'>
                     {/* Projects */}

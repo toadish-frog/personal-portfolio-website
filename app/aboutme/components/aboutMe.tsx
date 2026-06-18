@@ -37,17 +37,16 @@ export function AboutMe() {
             <div className="flex justify-between items-start">
                 <h1 className="mb-8 mt-8 text-2xl font-semibold tracking-tighter">
                     {/* Conditionally rending text based on language */}
-                    {isEnglish ? "Hello" : "你好"}
+                    {isEnglish ? "Hello" : "▶︎•၊၊||၊|။||||။ ၊|• 6:07"}
                 </h1>
 
-{/* Do not delete, this just diable and hides the button */}
-                {/* <button
+                <button
                     onClick={toggleEN}
                     className="px-2 py-1 
                     bg-zinc-500
                     text-white text-sm rounded-md shadow-md hover:bg-red-600">
-                    {isEnglish ? "切换到中文 (Beta)" : "Switch to English (Beta)"}
-                </button> */}
+                    {isEnglish ? "Unrender Reality" : "back"}
+                </button>
             </div>
 
             <div className="mb-4">
@@ -55,11 +54,11 @@ export function AboutMe() {
                 {aboutMe.map((line, idx) => (
                     <div key={idx}>
                         {isEnglish ? (
-                            line.en.split('*').map((sentence, index) => (
+                            line.front.split('*').map((sentence, index) => (
                                 <p key={index}>{sentence.trim()}</p>
                             ))
                         ) : (
-                            line.zh.split("*").map((sentence, index) => (
+                            line.back.split("*").map((sentence, index) => (
                                 <p key={index}>{sentence.trim()}</p>
                             ))
                         )}
