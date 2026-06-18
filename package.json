@@ -16,7 +16,7 @@
     "get-all-file": "^0.0.2",
     "next": "canary",
     "next-cloudinary": "^6.6.2",
-    "next-mdx-remote": "^4.4.1",
+    "next-mdx-remote": "^6.0.0",
     "postcss": "^8.4.35",
     "react": "18.2.0",
     "react-dom": "18.2.0",
