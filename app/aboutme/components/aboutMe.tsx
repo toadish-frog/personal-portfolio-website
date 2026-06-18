@@ -40,13 +40,14 @@ export function AboutMe() {
                     {isEnglish ? "Hello" : "你好"}
                 </h1>
 
-                <button
+{/* Do not delete, this just diable and hides the button */}
+                {/* <button
                     onClick={toggleEN}
                     className="px-2 py-1 
                     bg-zinc-500
                     text-white text-sm rounded-md shadow-md hover:bg-red-600">
                     {isEnglish ? "切换到中文 (Beta)" : "Switch to English (Beta)"}
-                </button>
+                </button> */}
             </div>
 
             <div className="mb-4">

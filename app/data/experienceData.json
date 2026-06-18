@@ -1,10 +1,19 @@
 [
     {
+        "title":"Master Data Management",
+        "orgName": "Thrasio",
+        "duration": "2025-02 - 2026-06",
+        "location": "Shenzhen/Remote",
+        "summary": "Supply Chain, NetSuite, Data Modeling, Google Clouds, Ai Agents, Workflow Automation",
+        "image": "/Experience/work_experience_img/Thrasio_logo.jpg",
+        "slug": "https://www.linkedin.com/company/thrasio"
+    },
+    {
         "title": "Business Analyst",
         "orgName": "Norsat International Inc.",
         "duration": "2023-06 - 2024-02",
         "location": "Richmond, BC",
-        "summary": "Supply Chain Analyst, Data Analyst, SQL",
+        "summary": "Supply Chain, Power BI, Business Central, MySQL, KPI Building",
         "image": "/Experience/work_experience_img/Norsat.webp",
         "logo": "/Experience/work_experience_img/Norsat_logo.png",
         "slug": "https://www.norsat.com/pages/about-us"
