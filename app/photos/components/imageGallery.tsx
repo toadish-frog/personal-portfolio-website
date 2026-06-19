@@ -121,7 +121,7 @@ export default function ImageGallery() {
                 ))}
             </div>
             {selectedImage && (
-                <div className={`fixed inset-0 flex justify-center items-center z-50`}>
+                <div className={`fixed inset-0 flex justify-center items-center`}>
                     <div className={`
                     relative bg-white/90 dark:bg-black/50
                     lg:w-[70%] lg:h-[85%] lg:m-20 lg:mt-10
@@ -129,7 +129,7 @@ export default function ImageGallery() {
                     w-11/12 h-3/4 
                     p-2 rounded-lg image-popup
                     `}>
-                        {/* 右上角退出按钮 */}
+                        {/* exit-button-top-right */}
                         <button className="dark:text-white absolute top-2 right-2 text-black" onClick={closeOverlay}>
                             &times;
                         </button>
@@ -146,23 +146,8 @@ export default function ImageGallery() {
                             </div>
                         </div>
 
-                        {/* 单页照片标题 - 统一 */}
-                        <div className="items-center justify-center flex">
-                            <FadeText
-                                diyStyle="text-center lg:text-3xl text-2xl w-fit mt-2 mb-2 
-                                text-transparent bg-clip-text bg-gradient-to-b
-                                from-zinc-800 via-zinc-600 to-stone-600
-                                dark:from-zinc-400 dark:via-zinc-100 dark:to-stone-300
-                                hover:text-red-600 font-bold duration-150"
-                                defaultText={'无题'}
-                                hoverText={'答案并不重要'}
-                                duration={300}
-                                enableClicked={true}
-                            />
-                        </div>
-
-                        {/* 照片信息  */}
-                        <div className="justify-center flex center w-full mt-2 mb-2 px-4">
+                        {/* photo-metadata  */}
+                        <div className="justify-center flex w-full mt-20 px-4">
                             <div className="justify-between flex
                             lg:w-[90%] w-full text-sm lg:text-md
                             text-transparent bg-clip-text bg-gradient-to-b
