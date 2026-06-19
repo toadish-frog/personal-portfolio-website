@@ -1,5 +1,105 @@
 [
     {
+        "src":"https://cdn.jsdelivr.net/gh/toadish-frog/picx-images-hosting@master/photo/digital/canada/img010.6m4kbti102.webp",
+        "alt":"vancouver-island",
+        "width":"300",
+        "height":"200",
+        "country":"Canada",
+        "city":"Vancouver Island",
+        "date":"2021-04",
+        "camera":"Fuji DL-1000 zoom",
+        "fstop":"auto",
+        "lens":"auto",
+        "focal.Length":"24mm",
+        "isFilm":true,
+        "filmMake":"",
+        "tags":[
+            "Film",
+            "Color",
+            "Canada"
+        ]
+    },
+    {
+        "src":"https://cdn.jsdelivr.net/gh/toadish-frog/picx-images-hosting@master/photo/digital/canada/DSC08794-1.szm2j8s1w.webp",
+        "alt":"yukon-basin",
+        "width":300,
+        "height":200,
+        "country":"Canada",
+        "city":"Yukon",
+        "date":"2021-01",
+        "camera":"Sony ILCE-7M3",
+        "fstop":"auto",
+        "lens":"Sony 70-200mm F4.0 G OSS E-mount",
+        "focal.Length":"70mm",
+        "isFilm":false,
+        "filmMake":"",
+        "tags":[
+            "Digital",
+            "B&W",
+            "Canada"
+        ]
+    },
+    {
+        "src":"https://cdn.jsdelivr.net/gh/toadish-frog/picx-images-hosting@master/photo/digital/canada/DSC00161.4cljsbm0jj.webp",
+        "alt":"elfin-lakes",
+        "width":300,
+        "height":200,
+        "country":"Canada",
+        "city":"Squamish",
+        "date":"2021-06-18",
+        "camera":"Sony ILCE-7M3",
+        "fstop":"auto",
+        "lens":"Sony Vario-Tessar T* FE 16-35mm F4 ZA OSS",
+        "focal.Length":"35mm",
+        "isFilm":false,
+        "filmMake":"",
+        "tags":[
+            "Digital",
+            "Color",
+            "Canada"
+        ]
+    },
+    {
+        "src":"https://cdn.jsdelivr.net/gh/toadish-frog/picx-images-hosting@master/photo/digital/canada/DSC00161.4cljsbm0jj.webp",
+        "alt":"joffre-lake",
+        "width":300,
+        "height":200,
+        "country":"Canada",
+        "city":"Pemberton",
+        "date":"2023-08",
+        "camera":"Sony ILCE-7M3",
+        "fstop":"auto",
+        "lens":"Sony Vario-Tessar T* FE 16-35mm F4 ZA OSS",
+        "focal.Length":"16mm",
+        "isFilm":false,
+        "filmMake":"",
+        "tags":[
+            "Digital",
+            "Color",
+            "Canada"
+        ]
+    },
+    {
+        "src":"https://cdn.jsdelivr.net/gh/toadish-frog/picx-images-hosting@master/photo/digital/canada/DSC00174.6po69hytgn.webp",
+        "alt":"elfin-lakes",
+        "width":"300",
+        "height":"200",
+        "country":"Canada",
+        "city":"Squamish",
+        "date":"2021-06-18",
+        "camera":"Sony ILCE-7M3",
+        "fstop":"",
+        "lens":"Sony Sonnar T* FE 35mm F2.8 ZA",
+        "focal.Length":"35mm",
+        "isFilm":false,
+        "filmMake":"",
+        "tags":[
+            "Digital",
+            "Color",
+            "Canada"
+        ]
+    },
+    {
         "src": "https://cdn.jsdelivr.net/gh/xya89/picx-images-hosting@master/photo/digital/japan/DSC_1889.6wqkga8rtc.webp",
         "alt": "umbrella",
         "width": 300,
@@ -1524,7 +1624,7 @@
         "width": 300,
         "height": 200,
         "country": "Canada",
-        "city": "Whitehorse",
+        "city": "Yukon",
         "date": "2021-01",
         "camera": "Sony ILCE-7M3",
         "fstop": "auto",
@@ -1564,8 +1664,8 @@
         "width": 300,
         "height": 200,
         "country": "Canada",
-        "city": "Joffre Lake",
-        "date": "2021-01",
+        "city": "Pemberton",
+        "date": "2023-08",
         "camera": "Sony ILCE-7M3",
         "fstop": "auto",
         "lens": "Sony Vario-Tessar T* FE 16-35mm F4 ZA OSS",
