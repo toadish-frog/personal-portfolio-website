@@ -1,5 +1,5 @@
 ---
-title: 'Install Ubuntu on a PC with Old Hardware'
+title: 'Install Ubuntu on a PC with Old Nvidia GPU (Maxwell)'
 publishedAt: '2026-06-19'
 summary: 'How to install Ubuntu on a PC with dated hardwares'
 cover: '/blog/post_image/ubuntu-cover.png'
@@ -7,9 +7,7 @@ tag: 'Tech'
 ---
 
 ## Solution
-Just stick to Ubuntu 24.04 LTS if your stuff is old and install the proprietary NVIDIA drivers directly from the OS installer **DO NOT** instal them via apt.
-
-After installation, verify that you are running `X11` by running `echo $XDG_SESSION_TYPE` in the terminal. If it outputs `x11`, you're good to go.
+Just buy a new Nvidia 40 series GPU or switch to AMD if you dont need the CUDA cores. Otherwise you are very likely to get yourself extremely pissed off for configuring the Nvidia drivers that comes with Linux Distros which does not support older Nvidia GPUs.
 
 ## Backgrounds
 I had a bunch of old PC hardware sitting in my closet, so I figured, why not build an Ubuntu rig? 
@@ -20,6 +18,38 @@ I really wanted to isolate my main gaming PC from my other tasks. Since Ubuntu i
 - **Motherboard**: ASUS X570 TUF WiFi
 - **GPU**: **NVIDIA GTX 750 Ti ASUS 2FAN** \<- This is the exact model in the game *Esacpe from Tarkov*
 - **RAM**: Trident Z DDR4 3200mHz 8G x 4
+
+## Process
+- Assemble all of your components, make sure everthing seats tightly, check power connections, etc.
+- Prepare the installation media, usually a usb stick. You can download the ubuntu distros `.iso` file and prepare the installation drive using **[Rufus](https://rufus.ie/en/)**.
+    - Inside **Rufus**, select your usb stick, and `SELECT` your downloaded `.iso` file. 
+    - Set **Partition scheme** to **MBT**, leave the rest as is.
+    - Click **Start** and it will prompt you options, use default.
+- Insert your usb stick to the rig, and boot, press `DEL` or `F2` key repeatly until enter bios, then on ASUS, `F8` to choose boot drive. Select your stick as the boot drive. 
+This should bring up the GRUB menu.
+- Now, with modern linux knernels, the first "Try Ubuntu" or "*Ubuntu" option will most likely failed and boot to a black screen. This is due to the driver incompatibility. 
+To resolve this, choose the option that has "safe graphic modes". It will boot you with a basic driver that has video. 
+Install the stuff from there, select **install properitary drivers**, as the kernel detects your NVIDIA GPU, this will allow the system to also install the drivers for your GPU which will probably not work.
+- After installation, login and run the below in terminal: 
+    ```terminal
+    sudo apt update
+    nvidia-smi
+    ```
+    It should output a text box listing the nvidia drivers. Mostly likely `Nvidia-550` if you are on `Ubuntu 22.04 LTS` and `Nvidia-535` if you are on `Ubuntu 24.04 LTS`. 
+    This drivers will work but are for real for real unstable per my experience. So you will likely have to force `Nvidia-470` on these distros. 
+
+- If you simply ask AI, it will most likelyk tell you to:
+    ```terminal
+    sudo apt purge '*nvidia*'
+    sudo apt autoremove && autoclean
+    ...
+    sudo apt install nvidia-driver-470
+    ```
+    I can confirm that will not work at all.
+    Instead, you will have to setup pining to strictly enforce a driver release. This [reddit post here](https://www.reddit.com/r/debian/comments/1ndbjdr/a_guide_to_installing_nvidia_470_drivers_on/) is a very detailed how to. It's in Debian, but it's mostly the same as in Ubunutu. 
+    In case this post is gone or URL is invalid, here is the summary: 
+    
+
 
 ```plaintext
 ⣿⣿⣿⣿⣿⣿⣿⣿⡿⠿⠛⠛⠛⠋⠉⠈⠉⠉⠉⠉⠛⠻⢿⣿⣿⣿⣿⣿⣿⣿⠀
