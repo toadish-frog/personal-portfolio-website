@@ -1,53 +1,54 @@
 ---
 title: 'Install Ubuntu on a PC with Old Nvidia GPU (Maxwell)'
 publishedAt: '2026-06-19'
-summary: 'How to install Ubuntu on a PC with dated hardwares'
+summary: 'How to install Ubuntu on a PC with dated hardware'
 cover: '/blog/post_image/ubuntu-cover.png'
 tag: 'Tech'
 ---
 
 ## Solution
-Just buy a new Nvidia 40 series GPU or switch to AMD if you dont need the CUDA cores. Otherwise you are very likely to get yourself extremely pissed off for configuring the Nvidia drivers that comes with Linux Distros which does not support older Nvidia GPUs.
+Just buy a new Nvidia 40-series GPU or switch to AMD if you don't need the CUDA cores. Otherwise, you are very likely to end up extremely pissed off trying to configure the Nvidia drivers that come with Linux distros, which do not support older Nvidia GPUs.
 
-## Backgrounds
+## Background
 I had a bunch of old PC hardware sitting in my closet, so I figured, why not build an Ubuntu rig? 
 I really wanted to isolate my main gaming PC from my other tasks. Since Ubuntu is free, lightweight, and highly compatible, it was exactly what I needed.
 
-## PC Hardware Lists
+## PC Hardware List
 - **CPU**: Ryzen 3700X
 - **Motherboard**: ASUS X570 TUF WiFi
-- **GPU**: **NVIDIA GTX 750 Ti ASUS 2FAN** \<- This is the exact model in the game *Esacpe from Tarkov*
-- **RAM**: Trident Z DDR4 3200mHz 8G x 4
+- **GPU**: **NVIDIA GTX 750 Ti ASUS 2FAN** \<\- This is the exact model featured in the game *Escape from Tarkov*
+- **RAM**: Trident Z DDR4 3200MHz (8GB x 4)
 
 ## Process
-- Assemble all of your components, make sure everthing seats tightly, check power connections, etc.
-- Prepare the installation media, usually a usb stick. You can download the ubuntu distros `.iso` file and prepare the installation drive using **[Rufus](https://rufus.ie/en/)**.
-    - Inside **Rufus**, select your usb stick, and `SELECT` your downloaded `.iso` file. 
-    - Set **Partition scheme** to **MBT**, leave the rest as is.
-    - Click **Start** and it will prompt you options, use default.
-- Insert your usb stick to the rig, and boot, press `DEL` or `F2` key repeatly until enter bios, then on ASUS, `F8` to choose boot drive. Select your stick as the boot drive. 
-This should bring up the GRUB menu.
-- Now, with modern linux knernels, the first "Try Ubuntu" or "*Ubuntu" option will most likely failed and boot to a black screen. This is due to the driver incompatibility. 
-To resolve this, choose the option that has "safe graphic modes". It will boot you with a basic driver that has video. 
-Install the stuff from there, select **install properitary drivers**, as the kernel detects your NVIDIA GPU, this will allow the system to also install the drivers for your GPU which will probably not work.
-- After installation, login and run the below in terminal: 
+- Assemble all of your components. Make sure everything is seated tightly, check power connections, etc.
+- Prepare the installation media, usually a USB stick. You can download the Ubuntu distro's `.iso` file and prepare the installation drive using **[Rufus](https://rufus.ie/en/)**.
+    - Inside **Rufus**, select your USB stick, and click `SELECT` to choose your downloaded `.iso` file. 
+    - Set **Partition scheme** to **MBR**, and leave the rest as is.
+    - Click **Start** and use the default options when prompted.
+- Insert your USB stick into the rig and boot. Press the `DEL` or `F2` key repeatedly to enter the BIOS. On ASUS motherboards, press `F8` to choose the boot drive. Select your USB stick as the boot drive. This should bring up the GRUB menu.
+- With modern Linux kernels, the default "Try or Install Ubuntu" option will most likely fail and boot to a black screen due to driver incompatibility. To resolve this, choose the option that has "safe graphics" mode. It will boot you with a basic display driver.
+- Proceed with the installation. Make sure to check **Install third-party software for graphics and Wi-Fi hardware** (which includes proprietary drivers). Although the kernel will detect your NVIDIA GPU and install drivers for it, those drivers will probably not work out of the box.
+- After installation, log in and run the following in the terminal: 
     ```terminal
     sudo apt update
     nvidia-smi
     ```
-    It should output a text box listing the nvidia drivers. Mostly likely `Nvidia-550` if you are on `Ubuntu 22.04 LTS` and `Nvidia-535` if you are on `Ubuntu 24.04 LTS`. 
-    This drivers will work but are for real for real unstable per my experience. So you will likely have to force `Nvidia-470` on these distros. 
+    This should output a text box listing the active NVIDIA drivers—most likely `nvidia-driver-550` if you are on Ubuntu 22.04 LTS, or `nvidia-driver-535` if you are on Ubuntu 24.04 LTS. 
+    These drivers might work, but they are genuinely unstable in my experience. So you will likely have to force `nvidia-driver-470` on these distros. 
 
-- If you simply ask AI, it will most likelyk tell you to:
+- If you ask an AI for help, it will most likely tell you to run:
     ```terminal
     sudo apt purge '*nvidia*'
-    sudo apt autoremove && autoclean
+    sudo apt autoremove && sudo apt autoclean
     ...
     sudo apt install nvidia-driver-470
     ```
-    I can confirm that will not work at all.
-    Instead, you will have to setup pining to strictly enforce a driver release. This [reddit post here](https://www.reddit.com/r/debian/comments/1ndbjdr/a_guide_to_installing_nvidia_470_drivers_on/) is a very detailed how to. It's in Debian, but it's mostly the same as in Ubunutu. 
-    In case this post is gone or URL is invalid, here is the summary: 
+    I can confirm that this approach does not work at all.
+    Instead, you will have to set up APT pinning to strictly enforce a driver release. This **[Reddit post here](https://www.reddit.com/r/debian/comments/1ndbjdr/a_guide_to_installing_nvidia_470_drivers_on/)** provides a very detailed how-to. Although written for Debian, the process is mostly the same for Ubuntu. 
+   
+But seriously, it wouldn't hurt to just drop in a 9060XT like I did. The amount of time spent trying to configure the proprietary drivers and praying the system won't break simply isn't worth it.
+As of writing this article (Jun 28, 2026, 01:41 HKT), my newly installed 9060XT is working exactly as expected.
+ 
     
 
 

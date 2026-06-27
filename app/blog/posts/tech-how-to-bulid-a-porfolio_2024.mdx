@@ -10,7 +10,7 @@ Ever since my junior year, I’ve wanted to build a personal website and even ga
 Before that, my only exposure to web tech was knowing Markdown is essentially a subset of HTML; I only used R Markdown to write reports and hand in assignments.
 Other than that, I knew absolutely nothing about web design.
 
-That summer, I tried building my own site from scratch, but for various reasons, the project crashed and burnedYou know too much.
+That summer, I tried building my own site from scratch, but for various reasons, the project crashed and burned.
 Fast forward to recently—thanks to a few coincidences, I found myself with enough free time to spend 25 hours a day deep-diving into the web. Seeing the badass, mind-blowing sites built by seasoned developers, the urge to build my own resurfaced.
 So, I started looking into modern tech stacks.
 
@@ -22,14 +22,14 @@ It's like making a bowl of pork rib noodles. I could easily grab pre-cooked garl
 But my goal was to buy the raw meat, figure out the recipe, and craft a flavor that’s entirely my own from scratch.
 
 So, where to start? After some digging, I looked into modern JS/TS frameworks like React and Vue. They modularize code into reusable components, making development, design, and maintenance a breeze while unlocking endless customization.
-I ultimately chose <span className="font-bold text-emerald-500 dark:text-pink-500">[NextJs](https://nextjs.org/docs)</span>,
+I ultimately chose <span className="font-bold text-emerald-500 dark:text-pink-500">[Next.js](https://nextjs.org/docs)</span>,
 a React-based framework. For static sites, it pre-renders pages at build time and generates static HTML files that can be deployed directly to any static file server, drastically boosting performance and security.
 Next.js delivers a modern single-page app user experience while optimizing SEO and performance out of the box—making it an incredibly flexible and powerful choice.
 
 ## Tech Stack
-#### Typescript
+#### TypeScript
 Incredibly convenient, great out of the box.
-#### NextJs 
+#### Next.js 
 *Note: At the time of writing, this site runs on Next.js v18.17 and utilizes App Router features* <span className="font-bold text-emerald-500 dark:text-pink-500">[Official Docs](https://nextjs.org/docs/app/building-your-application/routing)</span>
 
 Key takeaways:
@@ -46,7 +46,7 @@ Next.js doesn't ship with a built-in CSS framework, so I had to choose one. I di
 3. Fast to write with extensive documentation.
 
 Based on these criteria, I went with <span className="font-bold text-emerald-500 dark:text-pink-500">[TailwindCSS](https://tailwindcss.com/)</span>. 
-Its clean design and straightforward logic hooked me the second I landed on their homepage. It's lightweight, handles responsiveness seamlessly, and has an incredible amount of documentation and community support.
+Its clean design and straightforward logic hooked me the second I landed on their homepage. It's lightweight, handles responsiveness seamlessly, and has a wealth of documentation and community support.
 
 
 #### Markup
@@ -58,7 +58,7 @@ Looking through the Next.js official examples, I noticed most blogs use MDX. A b
 ```
 #### API
 Right now, I’m using the video player API from <span className="font-bold text-emerald-500 dark:text-pink-500">[Cloudinary](https://cloudinary.com/)</span>. As an incredibly robust CMS, Cloudinary offers some absolutely insane image and video processing features. 
-Coming from using GitHub Pages as a makeshift CMS, checking out Cloudinary for the first time had me thinking, "Whoa, that is wild". 
+Coming from using GitHub Pages as a makeshift CMS, checking out Cloudinary for the first time had me thinking, "Whoa, that is wild." 
 The catch is that its powerful features come at a price, and the premium tiers are pretty steep.
 
 ## Building the Site
@@ -66,7 +66,7 @@ The catch is that its powerful features come at a price, and the premium tiers a
 I started by mapping out my ideas in a mind map—deciding what pages I needed and what features went into each. This kept me grounded during development so I wouldn't drop everything to build a random new page on a whim.
 <div style={{ textAlign: 'center' }}>
     <img src="https://cdn.jsdelivr.net/gh/xya89/picx-images-hosting@master/posts/how_to_build_website_2024/brainstorm.1aouc8ljr5.webp" 
-    alt="table" 
+    alt="Brainstorming Mind Map" 
     height="400"
     width="600"
     style={{ display: 'block', margin: '0 auto' }} />
@@ -80,8 +80,7 @@ From there, it was just a matter of executing the plan laid out in the mind map.
 Right now, the site features Home, About, Blog, Photos, and Videos pages. Just taking it one page at a time.
 A couple of neat details:
 
-1. For rendering MDX in blog posts, `\blog\utils.ts` adopts the a
-pproach used in Next.js's <span className="font-bold text-emerald-500 dark:text-pink-500">[official blog template](https://github.com/vercel/examples/blob/main/solutions/blog/app/blog/utils.ts)</span>.
+1. For rendering MDX in blog posts, `app/blog/utils.ts` adopts the approach used in Next.js's <span className="font-bold text-emerald-500 dark:text-pink-500">[official blog template](https://github.com/vercel/examples/blob/main/solutions/blog/app/blog/utils.ts)</span>.
 2. Images are rendered using Next.js's built-in `<Image>` component. 
 Compared to native HTML `<img>` tags, `<Image>` handles automatic optimization like lazy loading, custom loaders, and sizing out of the box.
 
@@ -114,14 +113,13 @@ Before optimizing, I brushed up on Google Lighthouse's Web Vitals:
 
 1. **First Contentful Paint (FCP)**: How fast the first text or image appears on screen.
 2. **Largest Contentful Paint (LCP)**: How long it takes for the main content block or largest image to render.
-3. **Largest Contentful Paint (LCP)**: When the page becomes fully responsive to user input.
+3. **Time to Interactive (TTI)**: When the page becomes fully responsive to user input.
 4. **Total Blocking Time (TBT)**: The total amount of time between FCP and TTI where tasks take longer than 50ms, blocking the main thread.
 5. **Cumulative Layout Shift (CLS)**: Visual stability. If elements shift around during loading, it breaks the user experience. A low CLS means a stable, pleasant layout.
 
 Since Next.js handles the initial React render server-side, my primary focus is optimizing FCP and LCP.
 
-The current bottleneck is that images are passed to the `<Image>` component via remote URLs. I
-'m looking for a way to enable `getStaticProps` - like behavior for remote sources (WIP).
+The current bottleneck is that images are passed to the `<Image>` component via remote URLs. I'm looking for a way to enable `getStaticProps`-like behavior for remote sources (WIP).
 
 #### Switching CMS
 While GitHub Pages works fine for now, I plan to migrate the CMS to AWS services down the road to make the architecture more professional and learn the AWS ecosystem.
