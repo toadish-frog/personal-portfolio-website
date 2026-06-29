@@ -18,8 +18,7 @@ export function BlogPosts() {
         })
         .map((post) => (
           <Link key={post.slug} href={`/blog/${post.slug}`} className="block">
-            <div className="bg-white dark:bg-neutral-800 rounded-lg shadow-md overflow-hidden w-full 
-            transition ease-in-out delay-10 hover:-translate-y-1 hover:scale-101 duration-300">
+            <div className="card card-hover">
               <div className='w-full h-48 object-cover relative'>
                 {post.metadata.cover && (
                   <Image

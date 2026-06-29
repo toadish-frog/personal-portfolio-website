@@ -2,7 +2,7 @@ import { Icon_ArrowIcon, Icon_LinkedinIcon, Icon_GithubIcon } from "public/icon"
 
 export default function Footer() {
   return (
-    <footer className="antialiased max-w-6xl mx-2 mt-8 lg:mx-auto flex-auto min-w-0 mt-6 flex flex-col px-4 mb-16">
+    <footer className="page-section mb-16">
       <ul className="font-sm mt-8 flex flex-col space-x-0 space-y-2 text-neutral-600 md:flex-row md:space-x-4 md:space-y-0 dark:text-neutral-300">
         <li>
           <a

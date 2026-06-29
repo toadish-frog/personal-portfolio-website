@@ -30,9 +30,7 @@ export function Experience() {
 
     return (
         <section ref={refAll}
-            className={`flex flex-row justify-center w-full
-        transition-opactiy ease-in duration-700 ${isVisibleComp ? "opacity-100" : "opacity-0"}
-        `}>
+            className={`flex flex-row justify-center w-full fade-section ${isVisibleComp ? "opacity-100" : "opacity-0"}`}>
             <div className="containter lg:mx-auto space-y-6 justify-center w-full ">
                 <h1 className='font-bond text-3xl text-left mb-4 mt-4'>
                     Experience
@@ -44,9 +42,7 @@ export function Experience() {
                     return (
                         // Card view for each experience item
                         <div key={index}
-                            className="flex flex-col lg:flex-row overflow-hidden rounded-lg w-full
-                            transition ease-in-out delay-10 hover:-translate-y-1 hover:scale-101 duration-150
-                            my-8">
+                            className="flex flex-col lg:flex-row overflow-hidden rounded-lg w-full card-hover my-8">
                             {/* Timeline */}
                             <div className="w-1/8 flex flex-col items-center">
                                 {isMostRecentProject && (

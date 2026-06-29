@@ -68,7 +68,7 @@ export default function ImageGallery() {
 
     return (
         <section ref={refAll}
-            className={`transition-opactiy ease-in duration-700 ${isVisibleThis ? "opacity-100" : "opacity-0"}`}>
+            className={`fade-section ${isVisibleThis ? "opacity-100" : "opacity-0"}`}>
 
             {/* tags */}
             <div className="w-full flex justify-center mb-4">

@@ -96,6 +96,30 @@ html {
   @apply text-center text-sm text-neutral-500 dark:text-neutral-400 italic block;
 }
 
+.page-section {
+  @apply antialiased max-w-6xl mx-2 mt-8 lg:mx-auto flex-auto min-w-0 flex flex-col px-2 lg:px-4;
+}
+
+.page-heading {
+  @apply font-semibold text-2xl mb-8 mt-20 tracking-tighter bg-gradient-to-b text-transparent bg-clip-text from-zinc-900 via-zinc-800 to-stone-500 dark:from-zinc-300 dark:via-zinc-200 dark:to-stone-500;
+}
+
+.card {
+  @apply bg-white dark:bg-neutral-800 rounded-lg shadow-md overflow-hidden w-full;
+}
+
+.card-hover {
+  @apply transition ease-in-out hover:-translate-y-1 hover:scale-101 duration-300;
+}
+
+.fade-section {
+  @apply transition-opacity ease-in duration-700;
+}
+
+.section-content-col {
+  @apply my-8 flex justify-center flex-col;
+}
+
 .prose p {
   @apply my-4 text-neutral-800 dark:text-neutral-200;
 }

@@ -18,8 +18,7 @@ export function AboutMe() {
 
     return (
         <section ref={refAll}
-            className={`relative w-full 
-                        transition-opactiy ease-in duration-700 ${isVisibleAll ? "opacity-100" : "opacity-0"}`}>
+            className={`relative w-full fade-section ${isVisibleAll ? "opacity-100" : "opacity-0"}`}>
 
             <div className={`mt-20 w-32 h-32 rounded-full overflow-hidden bg-gray-300 dark:bg-gray-700 flex-shrink-0 mr-8 relative
             `}>

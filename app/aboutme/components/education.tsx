@@ -12,8 +12,7 @@ export function Education() {
     return (
         <section
             ref={refAll}
-            className={`flex flex-row justify-center w-full
-            transition-opactiy ease-in duration-700 ${isVisibleComp ? "opacity-100" : "opacity-0"}`}>
+            className={`flex flex-row justify-center w-full fade-section ${isVisibleComp ? "opacity-100" : "opacity-0"}`}>
             <div className="containter lg:mx-auto space-y-6 justify-center w-full">
                 <h1 className='font-bond text-3xl text-left mb-4 mt-4'>
                     Education
@@ -22,9 +21,7 @@ export function Education() {
                     // Card view for each education experience
                     <div
                         key={index}
-                        className="flex flex-col lg:flex-row shawdow-md rounded-lg overflow-hidden w-full
-                        lg:transition ease-in-out delay-10 hover:-translate-y-1 hover:scale-101 duration-150
-                        shadow-lg">
+                        className="flex flex-col lg:flex-row shawdow-md rounded-lg overflow-hidden w-full lg:card-hover shadow-lg">
                         {/* Image of the school */}
                         <Link href={edu.slug} className="w-full lg:w-1/2" target="_blank">
                             {edu.image && (

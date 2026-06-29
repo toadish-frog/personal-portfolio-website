@@ -21,8 +21,7 @@ export default function Home() {
 
   return (
     <div ref={ref1}
-      className={`flex flex-col items-center justify-center w-screen h-screen overflow-hidden
-        transition-opactiy ease-in duration-700 ${isVisible ? "opacity-100" : "opacity-0"}`}>
+      className={`flex flex-col items-center justify-center w-screen h-screen overflow-hidden fade-section ${isVisible ? "opacity-100" : "opacity-0"}`}>
       <div className="hidden w-screen h-px md:block" />
 
       <Particles
