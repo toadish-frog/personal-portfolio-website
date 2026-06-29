@@ -15,9 +15,9 @@ export function VideoGallery() {
 
     return (
         <section ref={refAll}
-            className={`transition-opactiy ease-in duration-700 ${isVisibleThis ? "opacity-100" : "opacity-0"}`}>
+            className={`transition-opacity ease-in duration-700 ${isVisibleThis ? "opacity-100" : "opacity-0"}`}>
             {videoSource.map((vid, index) => (
-                <div>
+                <div key={index}>
 
                     <p className="text-3xl mb-2 text-stone-800 dark:text-amber-50">
                         {vid.Title}

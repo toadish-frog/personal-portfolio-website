@@ -1,7 +1,15 @@
 'use client'
 import { useState } from "react";
 
-export function FadeText({ diyStyle, defaultText, hoverText, duration, enableClicked }) {
+interface FadeTextProps {
+    diyStyle: string;
+    defaultText: string;
+    hoverText: string;
+    duration: number;
+    enableClicked?: boolean;
+}
+
+export function FadeText({ diyStyle, defaultText, hoverText, duration, enableClicked }: FadeTextProps) {
     const [text, setText] = useState(defaultText);
     const [isFadingOut, setIsFadingOut] = useState(false);
 

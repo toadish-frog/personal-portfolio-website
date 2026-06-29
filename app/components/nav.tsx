@@ -53,14 +53,14 @@ export function Navbar() {
         className='fixed top-0 z-50 w-full fade'
       >
         <div
-          className={`lg:fixed lg:top-0 w-full backdrop-blur dark:backdrop-brightness-70 duration-200 border-b 
+          className={`lg:fixed lg:top-0 w-full backdrop-blur backdrop-grayscale dark:backdrop-brightness-70 duration-200 border-b 
         ${isIntersecting
-              ? "bg-zinc-900/0 border-transparent"
-              : "bg-zinc-900/500 border-zinc-800 backdrop-grayscale"}`}>
+              ? "bg-zinc-900/0 border-transparent backdrop-grayscale-0"
+              : "bg-zinc-900/50 border-zinc-800 backdrop-grayscale"}`}>
           {/* toggle drop down menu */}
           <div className="flex justify-between items-center px-4 py-2 lg:hidden">
             <button
-              onClick={toggleMenu}
+               onClick={toggleMenu}
               type="button"
               className="inline-flex items-center justify-center p-2 rounded-md text-gray-700 hover:text-white hover:bg-zinc-600/0 focus:outline-none focus:ring-2 focus:ring-inset focus:ring-white"
               aria-controls="mobile-menu"
@@ -91,7 +91,7 @@ export function Navbar() {
               bg-gradient-to-tr text-transparent bg-clip-text
               from-zinc-800 via-zinc-600 to-stone-600
               dark:from-zinc-400 dark:via-zinc-100 dark:to-stone-300
-              transition-opactiy ease-in duration-700 ${isMiniVisible ? "opacity-100" : "opacity-0"}`}>
+              transition-opacity ease-in duration-700 ${isMiniVisible ? "opacity-100" : "opacity-0"}`}>
               {Object.entries(navItems).map(([path, { name }]) => (
                 <Link
                   key={path}
@@ -107,7 +107,7 @@ export function Navbar() {
             {/* on large screens */}
             <div className="hidden lg:flex lg:items-center lg:space-x-4
             bg-gradient-to-b text-transparent bg-clip-text
-            from-zinc-900 via-zinc-800 to-stone-500.50
+            from-zinc-900 via-zinc-800 to-stone-50/50
             dark:from-zinc-300 dark:via-zinc-100 dark:to-stone-800
             ">
               {Object.entries(navItems).map(([path, { name }]) => (

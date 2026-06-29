@@ -8,29 +8,47 @@ import { useIsVisible } from "app/utils/isVisible";
 // 目前是通过jsDelivr进行资源分布的，正在摸索jsDelivr的相关api（如果有）
 import imageSource from 'app/data/imageSource.json'
 
+interface ImageItem {
+    src: string;
+    alt: string;
+    width: number | string;
+    height: number | string;
+    country: string;
+    city: string;
+    date: string;
+    camera: string;
+    fstop: string;
+    lens: string;
+    'focal.Length'?: string;
+    isFilm: boolean;
+    filmMake: string;
+    tags: string[];
+}
+
 // Shuffle Image Array
-const shuffleArray = (array) => {
+const shuffleArray = (array: ImageItem[]) => {
     return array.sort(() => Math.random() - 0.5);
 }
 
 export default function ImageGallery() {
 
-    const [selectedImage, setSelectedImage] = useState(null as any);
-    const [shuffledImage, setShuffleImages] = useState([] as any);
-    const [activeTags, setActiveTags] = useState(["B&W"]);
+    const [selectedImage, setSelectedImage] = useState<ImageItem | null>(null);
+    const [shuffledImage, setShuffleImages] = useState<ImageItem[]>([]);
+    const [activeTags, setActiveTags] = useState<string[]>(["B&W"]);
 
-    const refAll = useRef(null);
+    const refAll = useRef<HTMLElement>(null);
     const isVisibleThis = useIsVisible(refAll)
 
     // shuffle image everytime on re-enter the viewbox
     useEffect(() => {
-        setShuffleImages(shuffleArray([...imageSource]))
+        setShuffleImages(shuffleArray([...imageSource as ImageItem[]]))
     }, []);
 
     // click anywhere else the popup will also close
     useEffect(() => {
-        const handleOutsideClick = (event) => {
-            if (selectedImage && !event.target.closest('.image-popup')) {
+        const handleOutsideClick = (event: MouseEvent) => {
+            const target = event.target as HTMLElement;
+            if (selectedImage && !target.closest('.image-popup')) {
                 closeOverlay();
             }
         };
@@ -42,7 +60,7 @@ export default function ImageGallery() {
         };
     }, [selectedImage]);
 
-    const handleImageClick = (img) => {
+    const handleImageClick = (img: ImageItem) => {
         setSelectedImage(img);
     }
 
@@ -50,7 +68,7 @@ export default function ImageGallery() {
         setSelectedImage(null);
     }
 
-    const toggleTag = (tag) => {
+    const toggleTag = (tag: string) => {
         setActiveTags(preTags =>
             preTags.includes(tag)
                 ? preTags.filter(t => t !== tag)
