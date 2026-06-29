@@ -1,6 +1,6 @@
 import { notFound } from 'next/navigation'
 import { CustomMDX } from 'app/utils/mdx'
-import { formatDate, getBlogPosts } from 'app/blog/utils'
+import { formatDate, getBlogPosts } from 'app/(main)/blog/utils'
 import { baseUrl } from 'app/sitemap'
 
 export async function generateStaticParams() {
@@ -11,7 +11,7 @@ export async function generateStaticParams() {
   }))
 }
 
-export function generateMetadata({ params }) {
+export function generateMetadata({ params }: { params: { slug: string } }) {
   let post = getBlogPosts().find((post) => post.slug === params.slug)
   if (!post) {
     return
@@ -21,9 +21,11 @@ export function generateMetadata({ params }) {
     title,
     publishedAt: publishedTime,
     summary: description,
-    cover,
+    cover: image,
   } = post.metadata
-  let ogImage = cover ? cover : `${baseUrl}/og?title=${encodeURIComponent(title)}`
+  let ogImage = image
+    ? image
+    : `${baseUrl}/og?title=${encodeURIComponent(title)}`
 
   return {
     title,
@@ -34,7 +36,7 @@ export function generateMetadata({ params }) {
       type: 'article',
       publishedTime,
       url: `${baseUrl}/blog/${post.slug}`,
-      cover: [
+      images: [
         {
           url: ogImage,
         },
@@ -44,12 +46,12 @@ export function generateMetadata({ params }) {
       card: 'summary_large_image',
       title,
       description,
-      cover: [ogImage],
+      images: [ogImage],
     },
   }
 }
 
-export default function Blog({ params }) {
+export default function Blog({ params }: { params: { slug: string } }) {
   let post = getBlogPosts().find((post) => post.slug === params.slug)
 
   if (!post) {

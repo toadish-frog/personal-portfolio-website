@@ -1,6 +1,6 @@
 import Link from 'next/link'
 import Image from 'next/image';
-import { formatDate, getBlogPosts } from 'app/blog/utils'
+import { formatDate, getBlogPosts } from 'app/(main)/blog/utils'
 
 //TODO: add tagging features
 

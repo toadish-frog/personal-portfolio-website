@@ -14,6 +14,19 @@ interface ParticlesProps {
     color?: { r: number, g: number, b: number }
 }
 
+type Circle = {
+    x: number;
+    y: number;
+    translateX: number;
+    translateY: number;
+    size: number;
+    alpha: number;
+    targetAlpha: number;
+    dx: number;
+    dy: number;
+    magnetism: number;
+};
+
 export default function Particles({
     className = "",
     quantity = 30,
@@ -26,7 +39,7 @@ export default function Particles({
     const canvasContainerRef = useRef<HTMLDivElement>(null);
     const context = useRef<CanvasRenderingContext2D | null>(null);
 
-    const circles = useRef<any[]>([]);
+    const circles = useRef<Circle[]>([]);
     const mousePosition = useMousePosition();
     const mouse = useRef<{ x: number, y: number }>({ x: 0, y: 0 });
 
@@ -74,19 +87,6 @@ export default function Particles({
         }
     };
 
-
-    type Circle = {
-        x: number;
-        y: number;
-        translateX: number;
-        translateY: number;
-        size: number;
-        alpha: number;
-        targetAlpha: number;
-        dx: number;
-        dy: number;
-        magnetism: number;
-    };
 
     const resizeCanvas = () => {
         if (canvasContainerRef.current && canvasRef.current && context.current) {

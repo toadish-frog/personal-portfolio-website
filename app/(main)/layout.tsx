@@ -1,12 +1,7 @@
 import Footer from "app/components/footer"
 import { Navbar } from "app/components/nav"
 
-export const metadata = {
-    title: 'Video',
-    description: 'Constructing...',
-}
-
-export default function VideoLayout({
+export default function MainLayout({
     children,
 }: {
     children: React.ReactNode

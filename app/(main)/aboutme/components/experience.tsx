@@ -5,23 +5,34 @@ import { Icon_CalendarHero, Icon_LocationIcon } from "public/icon";
 import { useIsVisible } from "app/utils/isVisible";
 import { useRef } from "react";
 
+interface ExperienceItem {
+    orgName: string;
+    title: string;
+    location: string;
+    duration: string;
+    summary: string;
+    slug: string;
+    logo?: string;
+    image?: string;
+}
+
 export function Experience() {
 
-    const yearsWihMostRecentProjects: { [key: string]: any } = {};
+    const yearsWihMostRecentProjects: Record<string, ExperienceItem> = {};
     experienceData.forEach((exp) => {
         const year = exp.duration.split('-')[0].trim();
         if (!yearsWihMostRecentProjects[year]) {
-            yearsWihMostRecentProjects[year] = exp;
+            yearsWihMostRecentProjects[year] = exp as ExperienceItem;
         }
     })
 
     // Extract years and group experiences by year
-    const experienceByYear = experienceData.reduce((acc: { [key: string]: any[] }, exp) => {
+    const experienceByYear = experienceData.reduce((acc: Record<string, ExperienceItem[]>, exp) => {
         const year = exp.duration.split('-')[0].trim();
         if (!acc[year]) {
             acc[year] = [];
         }
-        acc[year].push(exp);
+        acc[year].push(exp as ExperienceItem);
         return acc;
     }, {});
 
@@ -93,6 +104,7 @@ export function Experience() {
                                             height={300}
                                             style={{ aspectRatio: '3/2', width: '100%', height: '100%', maxHeight: '300px' }}
                                             className="grayscale z-0"
+                                            priority={index === 0}
                                         />
                                         <Image
                                             src={exp.logo}
@@ -101,6 +113,7 @@ export function Experience() {
                                             height={150}
                                             className="absolute z-10 bottom-3 left-10"
                                             style={{ width: 'auto' }}
+                                            priority={index === 0}
                                         />
                                     </div>
                                 )}

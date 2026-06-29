@@ -1,4 +1,4 @@
-import { BlogPosts } from 'app/blog/components/posts'
+import { BlogPosts } from 'app/(main)/blog/components/posts'
 import { FadeText } from 'app/utils/fadehovertext'
 
 export default function Page() {

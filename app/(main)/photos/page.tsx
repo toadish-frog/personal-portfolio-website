@@ -1,4 +1,4 @@
-import ImageGallery from "app/photos/components/imageGallery";
+import ImageGallery from "app/(main)/photos/components/imageGallery";
 import { FadeText } from "app/utils/fadehovertext";
 
 export default async function Page() {
