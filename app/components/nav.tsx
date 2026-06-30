@@ -56,7 +56,7 @@ export function Navbar() {
           className={`lg:fixed lg:top-0 w-full backdrop-blur backdrop-grayscale dark:backdrop-brightness-70 duration-200 border-b 
         ${isIntersecting
               ? "bg-zinc-900/0 border-transparent backdrop-grayscale-0"
-              : "bg-zinc-900/50 border-zinc-800 backdrop-grayscale"}`}>
+              : "bg-zinc-900/500 border-zinc-800 backdrop-grayscale"}`}>
           {/* toggle drop down menu */}
           <div className="flex justify-between items-center px-4 py-2 lg:hidden">
             <button
