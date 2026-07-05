@@ -18,9 +18,21 @@ export function resolveLocale(lang: string): Locale {
   return isValidLocale(lang) ? lang : DEFAULT_LOCALE
 }
 
+// "简体" (jiǎntǐ, "Simplified [Chinese]") — names the script/locale variant,
+// not "中文" (Zhōngwén, "the Chinese language" generically), since this site
+// only offers the simplified-script locale.
 export const LOCALE_NAMES: Record<Locale, string> = {
   en: 'EN',
-  zh: '中文',
+  zh: '简体',
+}
+
+// Compact shorthand for the nav's small-screen locale switcher. "EN" is
+// already compact enough to keep as-is; "简" (the first character of "简体"
+// above) is the standard one-character shorthand for Simplified Chinese used
+// by real bilingual sites' compact locale pickers.
+export const LOCALE_NAMES_COMPACT: Record<Locale, string> = {
+  en: 'EN',
+  zh: '简',
 }
 
 // Shared by every fixed-route layout's generateMetadata (home, photos,
