@@ -13,8 +13,6 @@ export interface Dictionary {
     video: string
   }
   footer: {
-    linkedin: string
-    github: string
     license: string
   }
   home: {
