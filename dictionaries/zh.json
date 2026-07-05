@@ -26,7 +26,27 @@
   "pages": {
     "about": {
       "title": "关于",
-      "description": "一些关于我自己的事。"
+      "description": "一些关于我自己的事。",
+      "countriesHeading": "去过的地方",
+      "skillsHeading": "技能工具箱",
+      "professionalLinkLabel": "想看完整履历？请访问我的专业网站",
+      "terminal": [
+        {
+          "command": "whoami",
+          "output": ["Sean —— 旅行者、登山爱好者，偶尔也喜欢折腾自己的网站。"]
+        },
+        {
+          "command": "cat background.txt",
+          "output": [
+            "数据科学专业毕业，目前从事数据/机器学习相关工作。",
+            "完整履历见 -> yxyang.info"
+          ]
+        },
+        {
+          "command": "ls interests/",
+          "output": ["旅行/  登山/  摄影/  自驾游/  折腾老电脑/"]
+        }
+      ]
     },
     "photos": {
       "title": "照片",

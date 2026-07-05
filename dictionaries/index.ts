@@ -21,7 +21,14 @@ export interface Dictionary {
     tagline: string[]
   }
   pages: {
-    about: { title: string; description: string }
+    about: {
+      title: string
+      description: string
+      countriesHeading: string
+      skillsHeading: string
+      professionalLinkLabel: string
+      terminal: { command: string; output: string[] }[]
+    }
     photos: {
       title: string
       heading: string

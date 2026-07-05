@@ -30,6 +30,35 @@ export const VideoSchema = z.object({
 export type Video = z.infer<typeof VideoSchema>
 export const VideoListSchema = z.array(VideoSchema)
 
+export const CountrySchema = z.object({
+  name: z.string(),
+  lat: z.number().min(-90).max(90),
+  lng: z.number().min(-180).max(180),
+})
+export type Country = z.infer<typeof CountrySchema>
+export const CountryListSchema = z.array(CountrySchema)
+
+// Matches Aceternity UI's "Github Globe" arc data shape, so real trip data
+// can later be mapped into this exact shape without changing the component.
+export const GlobeArcSchema = z.object({
+  order: z.number(),
+  startLat: z.number().min(-90).max(90),
+  startLng: z.number().min(-180).max(180),
+  endLat: z.number().min(-90).max(90),
+  endLng: z.number().min(-180).max(180),
+  arcAlt: z.number().min(0).max(1),
+  color: z.string(),
+})
+export type GlobeArc = z.infer<typeof GlobeArcSchema>
+export const GlobeArcListSchema = z.array(GlobeArcSchema)
+
+export const SkillSchema = z.object({
+  name: z.string(),
+  slug: z.string(), // simple-icons export key, e.g. "siTypescript"
+})
+export type Skill = z.infer<typeof SkillSchema>
+export const SkillListSchema = z.array(SkillSchema)
+
 export const BlogFrontmatterSchema = z.object({
   title: z.string(),
   publishedAt: z

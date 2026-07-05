@@ -26,7 +26,31 @@
   "pages": {
     "about": {
       "title": "About",
-      "description": "Something about myself."
+      "description": "Something about myself.",
+      "countriesHeading": "Places I've Been",
+      "skillsHeading": "Toolbox",
+      "professionalLinkLabel": "Looking for my resume? Visit my professional site",
+      "terminal": [
+        {
+          "command": "whoami",
+          "output": [
+            "Sean — traveler, hiker, and someone who breaks his own website for fun."
+          ]
+        },
+        {
+          "command": "cat background.txt",
+          "output": [
+            "Data Science grad, now doing data/ML-adjacent work.",
+            "Full resume & work history -> yxyang.info"
+          ]
+        },
+        {
+          "command": "ls interests/",
+          "output": [
+            "travel/  hiking/  photography/  road-trips/  old-hardware/"
+          ]
+        }
+      ]
     },
     "photos": {
       "title": "Photos",
