@@ -1,14 +1,12 @@
 export const metadata = {
-    title: 'Photos',
-    description: 'Constructing...',
+  title: 'Photos',
+  description: 'Constructing...',
 }
 
 export default function PhotosLayout({
-    children,
+  children,
 }: {
-    children: React.ReactNode
+  children: React.ReactNode
 }) {
-    return (
-        <>{children}</>
-    )
+  return <>{children}</>
 }

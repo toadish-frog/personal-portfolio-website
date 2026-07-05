@@ -60,8 +60,8 @@ export default function Blog({ params }: { params: { slug: string } }) {
 
   return (
     <section className="page-section">
-      <div className='container lg mx-auto w-full'>
-        <div className='bg-white dark:bg-neutral-800 rounded-lg shadow-md break-words'>
+      <div className="lg container mx-auto w-full">
+        <div className="rounded-lg bg-white break-words shadow-md dark:bg-neutral-800">
           <script
             type="application/ld+json"
             suppressHydrationWarning
@@ -84,32 +84,31 @@ export default function Blog({ params }: { params: { slug: string } }) {
               }),
             }}
           />
-          {post.metadata.cover && (<img
-            src={post.metadata.cover}
-            alt={post.metadata.title}
-            className='w-full h-64 object-cover' />
+          {post.metadata.cover && (
+            <img
+              src={post.metadata.cover}
+              alt={post.metadata.title}
+              className="h-64 w-full object-cover"
+            />
           )}
           <div className="p-6">
-            <h1 className="title font-semibold text-2xl tracking-tighter">
+            <h1 className="title text-2xl font-semibold tracking-tighter">
               {post.metadata.title}
             </h1>
-            <div className="flex justify-between items-center mt-2 mb-8 text-sm">
+            <div className="mt-2 mb-8 flex items-center justify-between text-sm">
               <p className="text-sm text-neutral-600 dark:text-neutral-400">
                 {formatDate(post.metadata.publishedAt)}
               </p>
             </div>
-            <div className='flex justify-between items-center mt-2 mb-8 text-xl tracking-tighter break-normal'>
+            <div className="mt-2 mb-8 flex items-center justify-between text-xl tracking-tighter break-normal">
               {post.metadata.summary}
             </div>
             <article className="prose break-normal">
               <CustomMDX source={post.content} />
             </article>
           </div>
-
         </div>
-
       </div>
-
-    </section >
+    </section>
   )
 }

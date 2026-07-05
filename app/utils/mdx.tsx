@@ -4,7 +4,7 @@ import { MDXRemote } from 'next-mdx-remote/rsc'
 import { highlight } from 'sugar-high'
 import React from 'react'
 
-function Table({ data }: { data: { headers: string[], rows: string[][] } }) {
+function Table({ data }: { data: { headers: string[]; rows: string[][] } }) {
   let headers = data.headers.map((header, index) => (
     <th key={index}>{header}</th>
   ))
@@ -77,7 +77,7 @@ function createHeading(level: number) {
           className: 'anchor',
         }),
       ],
-      children
+      children,
     )
   }
 

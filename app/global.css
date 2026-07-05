@@ -35,7 +35,7 @@ html {
 }
 
 .prose .anchor {
-  @apply absolute invisible no-underline;
+  @apply invisible absolute no-underline;
 
   margin-left: -1em;
   padding-right: 0.5em;
@@ -49,7 +49,7 @@ html {
 }
 
 .prose a {
-  @apply underline transition-all decoration-neutral-400 dark:decoration-neutral-600 underline-offset-2 decoration-[0.1em];
+  @apply underline decoration-neutral-400 decoration-[0.1em] underline-offset-2 transition-all dark:decoration-neutral-600;
 }
 
 .prose .anchor:after {
@@ -57,16 +57,16 @@ html {
   content: '#';
 }
 
-.prose *:hover>.anchor {
+.prose *:hover > .anchor {
   @apply visible;
 }
 
 .prose pre {
-  @apply bg-neutral-50 dark:bg-neutral-900 rounded-lg overflow-x-auto border border-neutral-200 dark:border-neutral-900 py-2 px-3 text-sm;
+  @apply overflow-x-auto rounded-lg border border-neutral-200 bg-neutral-50 px-3 py-2 text-sm dark:border-neutral-900 dark:bg-neutral-900;
 }
 
 .prose code {
-  @apply px-1 py-0.5 rounded-lg;
+  @apply rounded-lg px-1 py-0.5;
 }
 
 .prose pre code {
@@ -85,7 +85,7 @@ html {
 }
 
 .img-wrapper {
-  @apply flex justify-center mt-6 mb-2;
+  @apply mt-6 mb-2 flex justify-center;
 }
 
 .img-wrapper img {
@@ -93,31 +93,31 @@ html {
 }
 
 .img-caption {
-  @apply text-center text-sm text-neutral-500 dark:text-neutral-400 italic block;
+  @apply block text-center text-sm text-neutral-500 italic dark:text-neutral-400;
 }
 
 .page-section {
-  @apply antialiased max-w-6xl mx-2 mt-8 lg:mx-auto flex-auto min-w-0 flex flex-col px-2 lg:px-4;
+  @apply mx-2 mt-8 flex max-w-6xl min-w-0 flex-auto flex-col px-2 antialiased lg:mx-auto lg:px-4;
 }
 
 .page-heading {
-  @apply font-semibold text-2xl mb-8 mt-20 tracking-tighter bg-gradient-to-b text-transparent bg-clip-text from-zinc-900 via-zinc-800 to-stone-500 dark:from-zinc-300 dark:via-zinc-200 dark:to-stone-500;
+  @apply mt-20 mb-8 bg-gradient-to-b from-zinc-900 via-zinc-800 to-stone-500 bg-clip-text text-2xl font-semibold tracking-tighter text-transparent dark:from-zinc-300 dark:via-zinc-200 dark:to-stone-500;
 }
 
 .card {
-  @apply bg-white dark:bg-neutral-800 rounded-lg shadow-md overflow-hidden w-full;
+  @apply w-full overflow-hidden rounded-lg bg-white shadow-md dark:bg-neutral-800;
 }
 
 .card-hover {
-  @apply transition ease-in-out hover:-translate-y-1 hover:scale-101 duration-300;
+  @apply transition duration-300 ease-in-out hover:-translate-y-1 hover:scale-101;
 }
 
 .fade-section {
-  @apply transition-opacity ease-in duration-700;
+  @apply transition-opacity duration-700 ease-in;
 }
 
 .section-content-col {
-  @apply my-8 flex justify-center flex-col;
+  @apply my-8 flex flex-col justify-center;
 }
 
 .prose p {
@@ -125,19 +125,19 @@ html {
 }
 
 .prose h1 {
-  @apply text-4xl font-medium tracking-tight mt-6 mb-2;
+  @apply mt-6 mb-2 text-4xl font-medium tracking-tight;
 }
 
 .prose h2 {
-  @apply text-xl font-medium tracking-tight mt-6 mb-2;
+  @apply mt-6 mb-2 text-xl font-medium tracking-tight;
 }
 
 .prose h3 {
-  @apply text-xl font-medium tracking-tight mt-6 mb-2;
+  @apply mt-6 mb-2 text-xl font-medium tracking-tight;
 }
 
 .prose h4 {
-  @apply text-lg font-medium tracking-tight mt-6 mb-2;
+  @apply mt-6 mb-2 text-lg font-medium tracking-tight;
 }
 
 .prose strong {
@@ -152,7 +152,7 @@ html {
   @apply list-decimal pl-6;
 }
 
-.prose> :first-child {
+.prose > :first-child {
   /* Override removing top margin, causing layout shift */
   margin-top: 1.25em !important;
   margin-bottom: 1.25em !important;

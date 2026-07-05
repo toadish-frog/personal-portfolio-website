@@ -1,14 +1,12 @@
 export const metadata = {
-    title: 'Video',
-    description: 'Constructing...',
+  title: 'Video',
+  description: 'Constructing...',
 }
 
 export default function VideoLayout({
-    children,
+  children,
 }: {
-    children: React.ReactNode
+  children: React.ReactNode
 }) {
-    return (
-        <>{children}</>
-    )
+  return <>{children}</>
 }

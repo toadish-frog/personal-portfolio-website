@@ -1,14 +1,12 @@
 export const metadata = {
-    title: 'Blog',
-    description: 'Read my blog.',
+  title: 'Blog',
+  description: 'Read my blog.',
 }
 
 export default function PostLayout({
-    children,
+  children,
 }: {
-    children: React.ReactNode
+  children: React.ReactNode
 }) {
-    return (
-        <>{children}</>
-    )
+  return <>{children}</>
 }

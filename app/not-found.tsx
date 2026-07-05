@@ -1,10 +1,10 @@
 export default function NotFound() {
   return (
-    <section className="antialiased max-w-6xl mx-2 mt-8 lg:mx-auto flex-auto min-w-0 mt-6 flex flex-col px-8">
-      <h1 className="mt-8 mb-8 text-2xl font-semibold tracking-tighter mx-auto">
+    <section className="mx-2 mt-6 mt-8 flex max-w-6xl min-w-0 flex-auto flex-col px-8 antialiased lg:mx-auto">
+      <h1 className="mx-auto mt-8 mb-8 text-2xl font-semibold tracking-tighter">
         404 - Page Not Found
       </h1>
-      <pre className="font-mono whitespace-pre text-[10px] leading-none tracking-normal block overflow-x-auto bg-neutral-900 p-4 rounded-lg text-white w-fit mx-auto">
+      <pre className="mx-auto block w-fit overflow-x-auto rounded-lg bg-neutral-900 p-4 font-mono text-[10px] leading-none tracking-normal whitespace-pre text-white">
         {`
 ⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⣀⣀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⣀⣀⣀⣀⣀⣀⣀⣀⣀⣀⣀
 ⠀⠀⠀⠀⠀⠀⠀⠀⢀⠤⠒⠈⠉⣠⣤⣤⣄⠈⠁⠒⢤⣤⣤⡀⠀⠀⠀⠀⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⡿

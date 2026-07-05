@@ -1,0 +1,12 @@
+.next
+out
+build
+node_modules
+package-lock.json
+public
+
+# Replaced by typed content/data/*.ts modules in Phase 1 — not worth reformatting now
+app/data/*.json
+
+# Hand-authored prose — avoid incidental reflow diffs
+app/(main)/blog/posts/*.mdx

@@ -1,31 +1,32 @@
 'use client'
-import Link from "next/link";
-import React from "react";
-import { useIsVisible } from "app/utils/isVisible";
-import Particles from "./components/particles";
-import { FadeText } from "app/utils/fadehovertext"
-import { CurrentDateTime } from "app/utils/currentDateTime";
-import { useRef } from "react";
+import Link from 'next/link'
+import React from 'react'
+import { useIsVisible } from 'app/utils/isVisible'
+import Particles from './components/particles'
+import { FadeText } from 'app/utils/fadehovertext'
+import { CurrentDateTime } from 'app/utils/currentDateTime'
+import { useRef } from 'react'
 
 const navigation = [
-  { name: "About", href: "/aboutme" },
-  { name: "Blog", href: "/blog" },
-  { name: "Photo", href: "/photos" },
-  { name: "Video", href: "/video" },
-
-];
+  { name: 'About', href: '/aboutme' },
+  { name: 'Blog', href: '/blog' },
+  { name: 'Photo', href: '/photos' },
+  { name: 'Video', href: '/video' },
+]
 
 export default function Home() {
-  const ref1 = useRef(null);
-  const isVisible = useIsVisible(ref1);
+  const ref1 = useRef(null)
+  const isVisible = useIsVisible(ref1)
 
   return (
-    <div ref={ref1}
-      className={`flex flex-col items-center justify-center w-screen h-screen overflow-hidden fade-section ${isVisible ? "opacity-100" : "opacity-0"}`}>
-      <div className="hidden w-screen h-px md:block" />
+    <div
+      ref={ref1}
+      className={`fade-section flex h-screen w-screen flex-col items-center justify-center overflow-hidden ${isVisible ? 'opacity-100' : 'opacity-0'}`}
+    >
+      <div className="hidden h-px w-screen md:block" />
 
       <Particles
-        className="absolute inset-0 -z-10 animate-fade-in"
+        className="animate-fade-in absolute inset-0 -z-10"
         quantity={300}
         color={{ r: 255, g: 10, b: 10 }}
       />
@@ -35,17 +36,14 @@ export default function Home() {
         year={true}
         hours={true}
         minutes={true}
-        seconds={true} />
+        seconds={true}
+      />
 
-      <div className="mt-10 lg:mt-28 text-center">
-        <div className="font-serif text-center font-bold 
-        text-2xl sm:text-4xl md:text-5xl lg:text-6xl xl:text-7xl 
-        text-stone-800
-        dark:text-stone-300
-        mb-6 sm:mb-8 md:mb-10 lg:mb-12 xl:mb-16 leading-tight">
-          Had I not seen the Sun <br /> I could have borne the shade <br /> But Light a newer Wilderness <br /> My Wilderness has made
+      <div className="mt-10 text-center lg:mt-28">
+        <div className="mb-6 text-center font-serif text-2xl leading-tight font-bold text-stone-800 sm:mb-8 sm:text-4xl md:mb-10 md:text-5xl lg:mb-12 lg:text-6xl xl:mb-16 xl:text-7xl dark:text-stone-300">
+          Had I not seen the Sun <br /> I could have borne the shade <br /> But
+          Light a newer Wilderness <br /> My Wilderness has made
         </div>
-
       </div>
 
       {/* <div className="mt-8 lg:mb-8 mb-4 text-center ">
@@ -58,16 +56,11 @@ export default function Home() {
         </div>
       </div> */}
 
+      <div className="hidden h-px w-screen bg-gradient-to-r from-zinc-300/0 via-zinc-300/50 to-zinc-300/0 md:block" />
 
-      <div className="hidden w-screen h-px md:block bg-gradient-to-r from-zinc-300/0 via-zinc-300/50 to-zinc-300/0" />
-
-      <div className="text-center ">
-        <nav className="my-10 mb-24 ">
-          <ul className="flex items-center justify-center gap-4 font-medium
-              bg-gradient-to-tr text-transparent bg-clip-text
-              from-zinc-800 via-zinc-600 to-stone-600
-              dark:from-zinc-400 dark:via-zinc-100 dark:to-stone-300"
-          >
+      <div className="text-center">
+        <nav className="my-10 mb-24">
+          <ul className="flex items-center justify-center gap-4 bg-gradient-to-tr from-zinc-800 via-zinc-600 to-stone-600 bg-clip-text font-medium text-transparent dark:from-zinc-400 dark:via-zinc-100 dark:to-stone-300">
             {navigation.map((item) => (
               <Link
                 key={item.href}
@@ -76,12 +69,10 @@ export default function Home() {
               >
                 {item.name}
               </Link>
-
             ))}
           </ul>
         </nav>
       </div>
     </div>
-  );
-
+  )
 }

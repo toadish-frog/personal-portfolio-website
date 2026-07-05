@@ -35,7 +35,8 @@ export const metadata: Metadata = {
   },
 }
 
-const cx = (...classes: (string | boolean | undefined | null)[]) => classes.filter(Boolean).join(' ')
+const cx = (...classes: (string | boolean | undefined | null)[]) =>
+  classes.filter(Boolean).join(' ')
 
 export default function RootLayout({
   children,
@@ -46,16 +47,13 @@ export default function RootLayout({
     <html
       lang="en"
       className={cx(
-        'text-black bg-white dark:text-white dark:bg-black',
+        'bg-white text-black dark:bg-black dark:text-white',
         GeistSans.variable,
-        GeistMono.variable
+        GeistMono.variable,
       )}
     >
-
-      <body className='antialiased'>
-        <main className='container'>
-          {children}
-        </main>
+      <body className="antialiased">
+        <main className="container">{children}</main>
       </body>
     </html>
   )

@@ -1,22 +1,22 @@
 'use client'
 
-import { useEffect, useState, RefObject } from "react";
+import { useEffect, useState, RefObject } from 'react'
 
 export function useIsVisible(ref: RefObject<Element | null>) {
-    const [isIntersecting, setIntersecting] = useState(false);
+  const [isIntersecting, setIntersecting] = useState(false)
 
-    useEffect(() => {
-        const element = ref.current;
-        if (!element) return;
+  useEffect(() => {
+    const element = ref.current
+    if (!element) return
 
-        const observer = new IntersectionObserver(([entry]) => {
-            setIntersecting(entry.isIntersecting);
-        });
+    const observer = new IntersectionObserver(([entry]) => {
+      setIntersecting(entry.isIntersecting)
+    })
 
-        observer.observe(element);
-        return () => {
-            observer.disconnect();
-        };
-    }, [ref]);
-    return isIntersecting;
+    observer.observe(element)
+    return () => {
+      observer.disconnect()
+    }
+  }, [ref])
+  return isIntersecting
 }
