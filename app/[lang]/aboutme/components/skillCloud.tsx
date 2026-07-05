@@ -1,6 +1,10 @@
 'use client'
-import { Cloud, renderSimpleIcon, type SimpleIcon } from 'react-icon-cloud'
-import type { IOptions } from 'react-icon-cloud'
+import {
+  Cloud,
+  renderSimpleIcon,
+  type SimpleIcon,
+  type IOptions,
+} from 'react-icon-cloud'
 import * as simpleIcons from 'simple-icons'
 import type { Skill } from '@/content/data/schema'
 

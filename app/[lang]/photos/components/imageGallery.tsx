@@ -2,16 +2,13 @@
 import Image from 'next/image'
 import { useEffect, useMemo, useState, useRef } from 'react'
 import { useIsVisible } from 'app/utils/isVisible'
+import { shuffleArray } from 'lib/utils'
+import { TagFilterBar } from '@/components/ui/tagFilterBar'
 import { photos } from '@/content/data/photos'
 import type { Photo } from '@/content/data/schema'
 
 const TAG_FILTERS = ['Digital', 'Film', 'B&W', 'Color']
 const PAGE_SIZE = 24
-
-// Shuffle Image Array
-const shuffleArray = (array: Photo[]) => {
-  return array.sort(() => Math.random() - 0.5)
-}
 
 export default function ImageGallery({
   loadMoreLabel,
@@ -80,27 +77,11 @@ export default function ImageGallery({
       ref={refAll}
       className={`fade-section ${isVisibleThis ? 'opacity-100' : 'opacity-0'}`}
     >
-      {/* tags */}
-      <div className="mb-4 flex w-full justify-center">
-        <div className="flex w-full max-w-md items-center justify-center rounded-full bg-stone-50 p-0.5 dark:bg-stone-900">
-          <div className="flex w-full flex-wrap gap-1">
-            {TAG_FILTERS.map((tag) => (
-              <button
-                key={tag}
-                onClick={() => toggleTag(tag)}
-                aria-pressed={activeTags.includes(tag)}
-                className={`text-md flex-1 rounded-full px-4 py-2 font-semibold transition duration-300 ease-in-out ${
-                  activeTags.includes(tag)
-                    ? 'bg-red-600 text-white'
-                    : 'bg-transparent text-stone-800 hover:text-stone-600 dark:text-amber-50 dark:hover:text-white'
-                }`}
-              >
-                {tag}
-              </button>
-            ))}
-          </div>
-        </div>
-      </div>
+      <TagFilterBar
+        tags={TAG_FILTERS}
+        isActive={(tag) => activeTags.includes(tag)}
+        onToggle={toggleTag}
+      />
 
       {filteredImages.length === 0 ? (
         <p className="text-center text-stone-600 dark:text-stone-400">

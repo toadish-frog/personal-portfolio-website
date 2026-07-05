@@ -1,10 +1,9 @@
 'use client'
-import React from 'react'
+import React, { useRef } from 'react'
 import dynamic from 'next/dynamic'
 import { useIsVisible } from 'app/utils/isVisible'
 import { usePrefersReducedMotion } from 'app/utils/usePrefersReducedMotion'
 import { CurrentDateTime } from 'app/utils/currentDateTime'
-import { useRef } from 'react'
 
 // Dynamically imported: heavy, purely decorative, and each already gates
 // itself behind prefers-reduced-motion — no reason to ship this JS on the

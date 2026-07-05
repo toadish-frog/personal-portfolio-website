@@ -1,5 +1,5 @@
 import { getDictionary } from '@/dictionaries'
-import { isValidLocale, type Locale } from '@/i18n'
+import { resolveLocale } from '@/i18n'
 import { HomeClient } from './homeClient'
 
 // Commented-out alternate tagline, preserved from before the i18n refactor:
@@ -11,7 +11,7 @@ export default async function Page({
   params: Promise<{ lang: string }>
 }) {
   const { lang } = await params
-  const safeLang: Locale = isValidLocale(lang) ? lang : 'en'
+  const safeLang = resolveLocale(lang)
   const dict = await getDictionary(safeLang)
 
   return <HomeClient tagline={dict.home.tagline} />

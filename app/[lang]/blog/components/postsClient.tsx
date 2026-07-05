@@ -3,6 +3,7 @@ import { useMemo, useState } from 'react'
 import Link from 'next/link'
 import Image from 'next/image'
 import { formatDate } from 'app/utils/formatDate'
+import { TagFilterBar } from '@/components/ui/tagFilterBar'
 import type { BlogFrontmatter } from '@/content/data/schema'
 import type { Locale } from '@/i18n'
 
@@ -42,35 +43,16 @@ export function BlogPostsClient({
   return (
     <div>
       {tags.length > 0 && (
-        <div className="mb-8 flex w-full justify-center">
-          <div className="flex w-full max-w-md flex-wrap items-center justify-center gap-1 rounded-full bg-stone-50 p-0.5 dark:bg-stone-900">
-            <button
-              onClick={() => setActiveTag(null)}
-              aria-pressed={activeTag === null}
-              className={`text-md flex-1 rounded-full px-4 py-2 font-semibold transition duration-300 ease-in-out ${
-                activeTag === null
-                  ? 'bg-red-600 text-white'
-                  : 'bg-transparent text-stone-800 hover:text-stone-600 dark:text-amber-50 dark:hover:text-white'
-              }`}
-            >
-              {allTagsLabel}
-            </button>
-            {tags.map((tag) => (
-              <button
-                key={tag}
-                onClick={() => setActiveTag(tag)}
-                aria-pressed={activeTag === tag}
-                className={`text-md flex-1 rounded-full px-4 py-2 font-semibold transition duration-300 ease-in-out ${
-                  activeTag === tag
-                    ? 'bg-red-600 text-white'
-                    : 'bg-transparent text-stone-800 hover:text-stone-600 dark:text-amber-50 dark:hover:text-white'
-                }`}
-              >
-                {tag}
-              </button>
-            ))}
-          </div>
-        </div>
+        <TagFilterBar
+          tags={tags}
+          isActive={(tag) => activeTag === tag}
+          onToggle={(tag) => setActiveTag(tag)}
+          leadingButton={{
+            label: allTagsLabel,
+            active: activeTag === null,
+            onClick: () => setActiveTag(null),
+          }}
+        />
       )}
 
       <div className="space-y-6">

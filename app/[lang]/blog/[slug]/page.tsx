@@ -4,7 +4,7 @@ import { CustomMDX } from 'app/utils/mdx'
 import { formatDate } from 'app/utils/formatDate'
 import { getBlogPosts } from 'lib/blog'
 import { baseUrl } from 'app/sitemap'
-import { isValidLocale, type Locale } from '@/i18n'
+import { resolveLocale } from '@/i18n'
 
 export async function generateStaticParams() {
   let posts = getBlogPosts()
@@ -20,7 +20,7 @@ export async function generateMetadata({
   params: Promise<{ lang: string; slug: string }>
 }) {
   const { lang, slug } = await params
-  const safeLang: Locale = isValidLocale(lang) ? lang : 'en'
+  const safeLang = resolveLocale(lang)
   let post = getBlogPosts().find((post) => post.slug === slug)
   if (!post) {
     return
@@ -66,7 +66,7 @@ export default async function Blog({
   params: Promise<{ lang: string; slug: string }>
 }) {
   const { lang, slug } = await params
-  const safeLang: Locale = isValidLocale(lang) ? lang : 'en'
+  const safeLang = resolveLocale(lang)
   let post = getBlogPosts().find((post) => post.slug === slug)
 
   if (!post) {

@@ -1,6 +1,6 @@
 import Link from 'next/link'
 import Image from 'next/image'
-import { MDXRemote } from 'next-mdx-remote/rsc'
+import { MDXRemote, type MDXRemoteProps } from 'next-mdx-remote/rsc'
 import { highlight } from 'sugar-high'
 import React from 'react'
 
@@ -26,8 +26,11 @@ function Table({ data }: { data: { headers: string[]; rows: string[][] } }) {
   )
 }
 
-function CustomLink(props: any) {
-  let href = props.href
+function CustomLink(props: React.ComponentProps<'a'>) {
+  // MDX always supplies a real href for rendered links; the empty-string
+  // fallback only matters for satisfying the type checker's possibly-undefined
+  // check and falls through to the harmless "external link" branch below.
+  let href = props.href ?? ''
 
   if (href.startsWith('/')) {
     return (
@@ -44,11 +47,14 @@ function CustomLink(props: any) {
   return <a target="_blank" rel="noopener noreferrer" {...props} />
 }
 
-function RoundedImage(props: any) {
-  return <Image alt={props.alt} className="rounded-lg" {...props} />
+function RoundedImage({ alt, ...props }: React.ComponentProps<typeof Image>) {
+  return <Image alt={alt} className="rounded-lg" {...props} />
 }
 
-function Code({ children, ...props }: any) {
+function Code({
+  children,
+  ...props
+}: { children: string } & Omit<React.ComponentProps<'code'>, 'children'>) {
   let codeHTML = highlight(children)
   return <code dangerouslySetInnerHTML={{ __html: codeHTML }} {...props} />
 }
@@ -65,7 +71,7 @@ function slugify(str: string) {
 }
 
 function createHeading(level: number) {
-  const Heading = ({ children }: { children: any }) => {
+  const Heading = ({ children }: { children: string }) => {
     let slug = slugify(children)
     return React.createElement(
       `h${level}`,
@@ -99,7 +105,7 @@ let components = {
   Table,
 }
 
-export function CustomMDX(props: any) {
+export function CustomMDX(props: MDXRemoteProps) {
   return (
     <MDXRemote
       {...props}

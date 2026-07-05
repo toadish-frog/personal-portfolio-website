@@ -1,5 +1,5 @@
 import { getDictionary } from '@/dictionaries'
-import { isValidLocale, type Locale } from '@/i18n'
+import { resolveLocale } from '@/i18n'
 import { globeArcs } from '@/content/data/globeArcs'
 import { skills } from '@/content/data/skills'
 import { AboutClient } from './aboutClient'
@@ -10,7 +10,7 @@ export default async function Page({
   params: Promise<{ lang: string }>
 }) {
   const { lang } = await params
-  const safeLang: Locale = isValidLocale(lang) ? lang : 'en'
+  const safeLang = resolveLocale(lang)
   const dict = await getDictionary(safeLang)
 
   return (

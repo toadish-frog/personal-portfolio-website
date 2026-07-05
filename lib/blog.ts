@@ -1,5 +1,6 @@
 import fs from 'fs'
 import path from 'path'
+import { cache } from 'react'
 import { z } from 'zod'
 import {
   BlogFrontmatterSchema,
@@ -58,6 +59,11 @@ function getMDXData(dir: string) {
   })
 }
 
-export function getBlogPosts() {
+// [slug]/page.tsx calls this three times per request (generateStaticParams,
+// generateMetadata, and the page component), each of which would otherwise
+// re-read and re-parse every .mdx file from disk just to find one slug.
+// cache() memoizes per-request, so all three share one actual read — file
+// changes are still picked up on the next request, this isn't a stale cache.
+export const getBlogPosts = cache(() => {
   return getMDXData(path.join(process.cwd(), 'content', 'blog'))
-}
+})
