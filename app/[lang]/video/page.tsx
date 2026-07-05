@@ -20,7 +20,7 @@ export default async function Page({
                 「梦应归于何处」
             </p> */}
 
-      <VideoGallery />
+      <VideoGallery noResultsLabel={dict.pages.video.noResults} />
     </section>
   )
 }

@@ -64,7 +64,8 @@
     "video": {
       "title": "Video",
       "heading": "Video",
-      "description": "Constructing..."
+      "description": "Clips from travels and everyday life.",
+      "noResults": "No videos match those tags."
     },
     "blog": {
       "title": "Blog",

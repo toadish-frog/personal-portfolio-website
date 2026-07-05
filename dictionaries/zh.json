@@ -60,7 +60,8 @@
     "video": {
       "title": "视频",
       "heading": "视频",
-      "description": "建设中……"
+      "description": "旅途与日常生活的片段。",
+      "noResults": "没有符合这些标签的视频。"
     },
     "blog": {
       "title": "博客",

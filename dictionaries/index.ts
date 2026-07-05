@@ -38,7 +38,12 @@ export interface Dictionary {
       loadMore: string
       noResults: string
     }
-    video: { title: string; heading: string; description: string }
+    video: {
+      title: string
+      heading: string
+      description: string
+      noResults: string
+    }
     blog: {
       title: string
       heading: string

@@ -26,6 +26,7 @@ export const VideoSchema = z.object({
   src: z.string().url(),
   alt: z.string(),
   title: z.string(),
+  tags: z.array(z.string()),
 })
 export type Video = z.infer<typeof VideoSchema>
 export const VideoListSchema = z.array(VideoSchema)
