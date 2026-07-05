@@ -1,46 +1,34 @@
 'use client'
 import Image from 'next/image'
-import { useEffect, useState, useRef } from 'react'
-import { FadeText } from 'app/utils/fadehovertext'
+import { useEffect, useMemo, useState, useRef } from 'react'
 import { useIsVisible } from 'app/utils/isVisible'
+import { photos } from '@/content/data/photos'
+import type { Photo } from '@/content/data/schema'
 
-// 因为懒得买cloudiary等的付费api服务(确实贵，不如买点薯条，所以假装自己有一个api返回值
-// 目前是通过jsDelivr进行资源分布的，正在摸索jsDelivr的相关api（如果有）
-import imageSource from 'app/data/imageSource.json'
-
-interface ImageItem {
-  src: string
-  alt: string
-  width: number | string
-  height: number | string
-  country: string
-  city: string
-  date: string
-  camera: string
-  fstop: string
-  lens: string
-  'focal.Length'?: string
-  isFilm: boolean
-  filmMake: string
-  tags: string[]
-}
+const TAG_FILTERS = ['Digital', 'Film', 'B&W', 'Color']
+const PAGE_SIZE = 24
 
 // Shuffle Image Array
-const shuffleArray = (array: ImageItem[]) => {
+const shuffleArray = (array: Photo[]) => {
   return array.sort(() => Math.random() - 0.5)
 }
 
-export default function ImageGallery() {
-  const [selectedImage, setSelectedImage] = useState<ImageItem | null>(null)
-  const [shuffledImage] = useState<ImageItem[]>(() =>
-    shuffleArray([...(imageSource as ImageItem[])]),
-  )
+export default function ImageGallery({
+  loadMoreLabel,
+  noResultsLabel,
+}: {
+  loadMoreLabel: string
+  noResultsLabel: string
+}) {
+  const [selectedImage, setSelectedImage] = useState<Photo | null>(null)
+  const [shuffledPhotos] = useState<Photo[]>(() => shuffleArray([...photos]))
   const [activeTags, setActiveTags] = useState<string[]>(['B&W'])
+  const [visibleCount, setVisibleCount] = useState(PAGE_SIZE)
 
   const refAll = useRef<HTMLElement>(null)
   const isVisibleThis = useIsVisible(refAll)
 
-  const handleImageClick = (img: ImageItem) => {
+  const handleImageClick = (img: Photo) => {
     setSelectedImage(img)
   }
 
@@ -65,20 +53,27 @@ export default function ImageGallery() {
   }, [selectedImage])
 
   const toggleTag = (tag: string) => {
-    setActiveTags((preTags) =>
-      preTags.includes(tag)
-        ? preTags.filter((t) => t !== tag)
-        : [...preTags, tag],
+    setActiveTags((prevTags) =>
+      prevTags.includes(tag)
+        ? prevTags.filter((t) => t !== tag)
+        : [...prevTags, tag],
     )
+    // A new filter selection is a new result set — start back at page one.
+    setVisibleCount(PAGE_SIZE)
   }
 
-  const filteredImages =
-    activeTags.length === 0
-      ? shuffledImage
-      : shuffledImage.filter(
-          (img) =>
-            img.tags && activeTags.every((tag) => img.tags.includes(tag)),
-        )
+  const filteredImages = useMemo(
+    () =>
+      activeTags.length === 0
+        ? shuffledPhotos
+        : shuffledPhotos.filter((img) =>
+            activeTags.every((tag) => img.tags.includes(tag)),
+          ),
+    [shuffledPhotos, activeTags],
+  )
+
+  const visibleImages = filteredImages.slice(0, visibleCount)
+  const hasMore = visibleCount < filteredImages.length
 
   return (
     <section
@@ -89,10 +84,11 @@ export default function ImageGallery() {
       <div className="mb-4 flex w-full justify-center">
         <div className="flex w-full max-w-md items-center justify-center rounded-full bg-stone-50 p-0.5 dark:bg-stone-900">
           <div className="flex w-full flex-wrap gap-1">
-            {['Digital', 'Film', 'B&W', 'Color'].map((tag) => (
+            {TAG_FILTERS.map((tag) => (
               <button
                 key={tag}
                 onClick={() => toggleTag(tag)}
+                aria-pressed={activeTags.includes(tag)}
                 className={`text-md flex-1 rounded-full px-4 py-2 font-semibold transition duration-300 ease-in-out ${
                   activeTags.includes(tag)
                     ? 'bg-red-600 text-white'
@@ -106,27 +102,46 @@ export default function ImageGallery() {
         </div>
       </div>
 
-      {/* Main */}
-      <div
-        className={`grid grid-flow-row grid-cols-1 justify-normal gap-4 md:grid-cols-2 lg:grid-cols-2 ${selectedImage ? 'blur-md brightness-50 grayscale' : ''} `}
-      >
-        {filteredImages.map((img, index) => (
-          <div key={index} className={`relative h-96 w-full object-cover`}>
-            <div style={{ paddingTop: '75%' /* 4:3 aspect ratio */ }}>
-              <Image
-                src={img.src}
-                alt={img.alt}
-                layout="fill"
-                objectFit="cover"
-                onClick={() => handleImageClick(img)}
-                loading="lazy"
-                className="rounded-xl shadow-md"
-                onContextMenu={(e) => e.preventDefault()}
-              />
-            </div>
+      {filteredImages.length === 0 ? (
+        <p className="text-center text-stone-600 dark:text-stone-400">
+          {noResultsLabel}
+        </p>
+      ) : (
+        <>
+          {/* Main */}
+          <div
+            className={`grid grid-flow-row grid-cols-1 justify-normal gap-4 md:grid-cols-2 lg:grid-cols-2 ${selectedImage ? 'blur-md brightness-50 grayscale' : ''} `}
+          >
+            {visibleImages.map((img, index) => (
+              <div key={`${img.src}-${index}`} className="relative h-96 w-full">
+                <div style={{ paddingTop: '75%' /* 4:3 aspect ratio */ }}>
+                  <Image
+                    src={img.src}
+                    alt={img.alt}
+                    fill
+                    onClick={() => handleImageClick(img)}
+                    loading="lazy"
+                    className="rounded-xl object-cover shadow-md"
+                    onContextMenu={(e) => e.preventDefault()}
+                  />
+                </div>
+              </div>
+            ))}
           </div>
-        ))}
-      </div>
+
+          {hasMore && (
+            <div className="mt-8 flex justify-center">
+              <button
+                onClick={() => setVisibleCount((count) => count + PAGE_SIZE)}
+                className="rounded-full border border-stone-300 px-6 py-2 font-semibold text-stone-800 transition hover:bg-stone-100 dark:border-stone-700 dark:text-amber-50 dark:hover:bg-stone-900"
+              >
+                {loadMoreLabel}
+              </button>
+            </div>
+          )}
+        </>
+      )}
+
       {selectedImage && (
         <div className={`fixed inset-0 flex items-center justify-center`}>
           <div
@@ -140,15 +155,13 @@ export default function ImageGallery() {
               &times;
             </button>
             <div className="relative mt-6 flex h-[70%] w-full lg:h-[85%]">
-              <div
-                style={{ position: 'relative', width: '100%', height: '100%' }}
-              >
+              <div className="relative h-full w-full">
                 <Image
                   src={selectedImage.src}
                   alt={selectedImage.alt}
-                  layout="fill"
-                  objectFit="contain"
+                  fill
                   loading="lazy"
+                  className="object-contain"
                   onContextMenu={(e) => e.preventDefault()}
                 />
               </div>
@@ -161,15 +174,23 @@ export default function ImageGallery() {
                   {selectedImage.camera}
                   <br />
                   {selectedImage.lens}
-                  <br />
-                  {selectedImage.isFilm ? selectedImage.filmMake : ''}
+                  {selectedImage.isFilm && selectedImage.filmMake && (
+                    <>
+                      <br />
+                      {selectedImage.filmMake}
+                    </>
+                  )}
                 </div>
                 <div className="flex flex-col text-right">
                   {selectedImage.city}
                   <br />
                   {selectedImage.country}
-                  <br />
-                  {selectedImage.date}
+                  {selectedImage.date && (
+                    <>
+                      <br />
+                      {selectedImage.date}
+                    </>
+                  )}
                 </div>
               </div>
             </div>

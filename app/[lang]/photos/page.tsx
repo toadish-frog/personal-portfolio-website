@@ -1,4 +1,4 @@
-import ImageGallery from 'app/[lang]/photos/components/imageGallery'
+import { PhotosClient } from './photosClient'
 import { getDictionary } from '@/dictionaries'
 import { isValidLocale, type Locale } from '@/i18n'
 
@@ -50,7 +50,10 @@ export default async function Page({
         </div>
       </div>
 
-      <ImageGallery />
+      <PhotosClient
+        loadMoreLabel={dict.pages.photos.loadMore}
+        noResultsLabel={dict.pages.photos.noResults}
+      />
     </section>
   )
 }

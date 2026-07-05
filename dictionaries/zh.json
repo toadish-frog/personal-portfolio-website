@@ -51,9 +51,11 @@
     "photos": {
       "title": "照片",
       "heading": "照片",
-      "description": "建设中……",
+      "description": "我旅途中的照片——胶片与数码。",
       "camera": "相机",
-      "lens": "镜头"
+      "lens": "镜头",
+      "loadMore": "加载更多",
+      "noResults": "没有符合这些标签的照片。"
     },
     "video": {
       "title": "视频",

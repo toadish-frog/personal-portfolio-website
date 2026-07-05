@@ -55,9 +55,11 @@
     "photos": {
       "title": "Photos",
       "heading": "Photo",
-      "description": "Constructing...",
+      "description": "Photos from my travels — film and digital.",
       "camera": "Camera",
-      "lens": "Lens"
+      "lens": "Lens",
+      "loadMore": "Load more",
+      "noResults": "No photos match those tags."
     },
     "video": {
       "title": "Video",

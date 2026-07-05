@@ -35,6 +35,8 @@ export interface Dictionary {
       description: string
       camera: string
       lens: string
+      loadMore: string
+      noResults: string
     }
     video: { title: string; heading: string; description: string }
     blog: {

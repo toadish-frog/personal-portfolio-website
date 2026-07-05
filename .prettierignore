@@ -14,4 +14,4 @@ content/blog/*.mdx
 # Third-party GeoJSON dataset (world country polygons for the globe) —
 # minified on purpose; pretty-printing balloons it from ~490KB to ~800KB
 # for zero benefit, since nobody hand-edits this file.
-data/globe.json
+content/data/globe.json
