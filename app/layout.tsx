@@ -2,6 +2,7 @@ import './global.css'
 import type { Metadata } from 'next'
 import { GeistSans } from 'geist/font/sans'
 import { GeistMono } from 'geist/font/mono'
+import { ThemeProvider } from 'app/components/theme-provider'
 
 // import { Analytics } from '@vercel/analytics/react'
 // import { SpeedInsights } from '@vercel/speed-insights/next'
@@ -36,14 +37,13 @@ export default function RootLayout({
   return (
     <html
       lang="en"
-      className={cx(
-        'bg-white text-black dark:bg-black dark:text-white',
-        GeistSans.variable,
-        GeistMono.variable,
-      )}
+      suppressHydrationWarning
+      className={cx(GeistSans.variable, GeistMono.variable)}
     >
-      <body className="antialiased">
-        <main className="container">{children}</main>
+      <body className="bg-white text-black antialiased dark:bg-black dark:text-white">
+        <ThemeProvider>
+          <main className="container">{children}</main>
+        </ThemeProvider>
       </body>
     </html>
   )

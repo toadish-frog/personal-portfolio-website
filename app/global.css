@@ -1,5 +1,10 @@
 @import 'tailwindcss';
 
+/* Tailwind v4 has no JS config for darkMode; this opts `dark:` utilities into
+   next-themes' class-based toggling instead of the default prefers-color-scheme
+   media query, so the manual light/dark switch in the nav actually works. */
+@custom-variant dark (&:is(.dark *));
+
 ::selection {
   background-color: #47a3f3;
   color: #fefefe;
