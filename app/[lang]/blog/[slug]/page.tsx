@@ -1,7 +1,8 @@
 import { notFound } from 'next/navigation'
 import { CustomMDX } from 'app/utils/mdx'
-import { formatDate, getBlogPosts } from 'app/(main)/blog/utils'
+import { formatDate, getBlogPosts } from 'lib/blog'
 import { baseUrl } from 'app/sitemap'
+import { isValidLocale, type Locale } from '@/i18n'
 
 export async function generateStaticParams() {
   let posts = getBlogPosts()
@@ -11,8 +12,14 @@ export async function generateStaticParams() {
   }))
 }
 
-export function generateMetadata({ params }: { params: { slug: string } }) {
-  let post = getBlogPosts().find((post) => post.slug === params.slug)
+export async function generateMetadata({
+  params,
+}: {
+  params: Promise<{ lang: string; slug: string }>
+}) {
+  const { lang, slug } = await params
+  const safeLang: Locale = isValidLocale(lang) ? lang : 'en'
+  let post = getBlogPosts().find((post) => post.slug === slug)
   if (!post) {
     return
   }
@@ -35,7 +42,7 @@ export function generateMetadata({ params }: { params: { slug: string } }) {
       description,
       type: 'article',
       publishedTime,
-      url: `${baseUrl}/blog/${post.slug}`,
+      url: `${baseUrl}/${safeLang}/blog/${post.slug}`,
       images: [
         {
           url: ogImage,
@@ -51,8 +58,14 @@ export function generateMetadata({ params }: { params: { slug: string } }) {
   }
 }
 
-export default function Blog({ params }: { params: { slug: string } }) {
-  let post = getBlogPosts().find((post) => post.slug === params.slug)
+export default async function Blog({
+  params,
+}: {
+  params: Promise<{ lang: string; slug: string }>
+}) {
+  const { lang, slug } = await params
+  const safeLang: Locale = isValidLocale(lang) ? lang : 'en'
+  let post = getBlogPosts().find((post) => post.slug === slug)
 
   if (!post) {
     notFound()
@@ -76,7 +89,7 @@ export default function Blog({ params }: { params: { slug: string } }) {
                 image: post.metadata.cover
                   ? `${baseUrl}${post.metadata.cover}`
                   : `/og?title=${encodeURIComponent(post.metadata.title)}`,
-                url: `${baseUrl}/blog/${post.slug}`,
+                url: `${baseUrl}/${safeLang}/blog/${post.slug}`,
                 author: {
                   '@type': 'Person',
                   name: 'My Portfolio',

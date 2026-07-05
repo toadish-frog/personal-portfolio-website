@@ -1,0 +1,53 @@
+{
+  "site": {
+    "title": "Home",
+    "description": "This is my portfolio."
+  },
+  "nav": {
+    "home": "home",
+    "about": "about",
+    "blog": "blog",
+    "photo": "photo",
+    "video": "video"
+  },
+  "footer": {
+    "linkedin": "LinkedIn",
+    "github": "github",
+    "license": "MIT Licensed"
+  },
+  "home": {
+    "tagline": [
+      "Had I not seen the Sun",
+      "I could have borne the shade",
+      "But Light a newer Wilderness",
+      "My Wilderness has made"
+    ]
+  },
+  "pages": {
+    "about": {
+      "title": "About",
+      "description": "Something about myself."
+    },
+    "photos": {
+      "title": "Photos",
+      "heading": "Photo",
+      "description": "Constructing...",
+      "camera": "Camera",
+      "lens": "Lens"
+    },
+    "video": {
+      "title": "Video",
+      "heading": "Video",
+      "description": "Constructing..."
+    },
+    "blog": {
+      "title": "Blog",
+      "heading": "Blog",
+      "description": "Read my blog.",
+      "readMore": "Read more"
+    }
+  },
+  "notFound": {
+    "title": "404 - Page Not Found"
+  }
+}

@@ -1,10 +1,17 @@
 import Link from 'next/link'
 import Image from 'next/image'
-import { formatDate, getBlogPosts } from 'app/(main)/blog/utils'
+import { formatDate, getBlogPosts } from 'lib/blog'
+import type { Locale } from '@/i18n'
 
 //TODO: add tagging features
 
-export function BlogPosts() {
+export function BlogPosts({
+  lang,
+  readMoreLabel,
+}: {
+  lang: Locale
+  readMoreLabel: string
+}) {
   let allBlogs = getBlogPosts()
 
   return (
@@ -19,7 +26,11 @@ export function BlogPosts() {
           return 1
         })
         .map((post) => (
-          <Link key={post.slug} href={`/blog/${post.slug}`} className="block">
+          <Link
+            key={post.slug}
+            href={`/${lang}/blog/${post.slug}`}
+            className="block"
+          >
             <div className="card card-hover">
               <div className="relative h-48 w-full object-cover">
                 {post.metadata.cover && (
@@ -44,7 +55,7 @@ export function BlogPosts() {
                   {post.metadata.summary}
                 </p>
                 <p className="w-full text-blue-500 hover:underline dark:text-red-500">
-                  Read more
+                  {readMoreLabel}
                 </p>
               </div>
             </div>

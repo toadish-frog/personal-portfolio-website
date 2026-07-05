@@ -7,21 +7,11 @@ import { GeistMono } from 'geist/font/mono'
 // import { SpeedInsights } from '@vercel/speed-insights/next'
 import { baseUrl } from './sitemap'
 
+// Locale-specific title/description/OpenGraph metadata is set per-request in
+// app/[lang]/layout.tsx (via generateMetadata reading the dictionary). This
+// root layout only owns the parts that are truly locale-independent.
 export const metadata: Metadata = {
   metadataBase: new URL(baseUrl),
-  title: {
-    default: 'Home',
-    template: '%s',
-  },
-  description: 'This is my portfolio.',
-  openGraph: {
-    title: 'Syang Personal Website',
-    description: 'This is my portfolio.',
-    url: baseUrl,
-    siteName: 'Syang Personal Website',
-    locale: 'en_US',
-    type: 'website',
-  },
   robots: {
     index: true,
     follow: true,

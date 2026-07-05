@@ -1,7 +1,7 @@
 'use client'
-import { Education } from 'app/(main)/aboutme/components/education'
-import { Experience } from 'app/(main)/aboutme/components/experience'
-import { AboutMe } from 'app/(main)/aboutme/components/aboutMe'
+import { Education } from 'app/[lang]/aboutme/components/education'
+import { Experience } from 'app/[lang]/aboutme/components/experience'
+import { AboutMe } from 'app/[lang]/aboutme/components/aboutMe'
 
 export default function Page() {
   return (

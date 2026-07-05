@@ -3,26 +3,24 @@ import Link from 'next/link'
 import { useState, useEffect, useRef } from 'react'
 import { Icon_CollapseIcon, Icon_CrossIcon } from 'public/icon'
 import { useIsVisible } from 'app/utils/isVisible'
+import type { Locale } from '@/i18n'
+import type { Dictionary } from '@/dictionaries'
 
-const navItems = {
-  '/': {
-    name: 'home',
-  },
-  '/blog': {
-    name: 'blog',
-  },
-  '/photos': {
-    name: 'photo',
-  },
-  '/video': {
-    name: 'video',
-  },
-  '/aboutme': {
-    name: 'about',
-  },
-}
+export function Navbar({
+  lang,
+  labels,
+}: {
+  lang: Locale
+  labels: Dictionary['nav']
+}) {
+  const navItems = {
+    [`/${lang}`]: { name: labels.home },
+    [`/${lang}/blog`]: { name: labels.blog },
+    [`/${lang}/photos`]: { name: labels.photo },
+    [`/${lang}/video`]: { name: labels.video },
+    [`/${lang}/aboutme`]: { name: labels.about },
+  }
 
-export function Navbar() {
   const [isOpen, setIsOpen] = useState(false)
   const [currentPage, setCurrentPage] = useState('')
 

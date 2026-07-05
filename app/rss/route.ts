@@ -1,8 +1,10 @@
 import { baseUrl } from 'app/sitemap'
-import { getBlogPosts } from 'app/(main)/blog/utils'
+import { getBlogPosts } from 'lib/blog'
+import { LOCALES } from '@/i18n'
 
 export async function GET() {
   let allBlogs = await getBlogPosts()
+  const [defaultLocale] = LOCALES
 
   const itemsXml = allBlogs
     .sort((a, b) => {
@@ -15,7 +17,7 @@ export async function GET() {
       (post) =>
         `<item>
           <title>${post.metadata.title}</title>
-          <link>${baseUrl}/blog/${post.slug}</link>
+          <link>${baseUrl}/${defaultLocale}/blog/${post.slug}</link>
           <description>${post.metadata.summary || ''}</description>
           <pubDate>${new Date(
             post.metadata.publishedAt,

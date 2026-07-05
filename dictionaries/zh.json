@@ -1,0 +1,53 @@
+{
+  "site": {
+    "title": "首页",
+    "description": "这是我的个人网站。"
+  },
+  "nav": {
+    "home": "主页",
+    "about": "关于",
+    "blog": "博客",
+    "photo": "照片",
+    "video": "视频"
+  },
+  "footer": {
+    "linkedin": "LinkedIn",
+    "github": "github",
+    "license": "MIT 授权"
+  },
+  "home": {
+    "tagline": [
+      "Had I not seen the Sun",
+      "I could have borne the shade",
+      "But Light a newer Wilderness",
+      "My Wilderness has made"
+    ]
+  },
+  "pages": {
+    "about": {
+      "title": "关于",
+      "description": "一些关于我自己的事。"
+    },
+    "photos": {
+      "title": "照片",
+      "heading": "照片",
+      "description": "建设中……",
+      "camera": "相机",
+      "lens": "镜头"
+    },
+    "video": {
+      "title": "视频",
+      "heading": "视频",
+      "description": "建设中……"
+    },
+    "blog": {
+      "title": "博客",
+      "heading": "博客",
+      "description": "阅读我的博客。",
+      "readMore": "阅读更多"
+    }
+  },
+  "notFound": {
+    "title": "404 - 页面未找到"
+  }
+}

@@ -9,4 +9,4 @@ public
 app/data/*.json
 
 # Hand-authored prose — avoid incidental reflow diffs
-app/(main)/blog/posts/*.mdx
+content/blog/*.mdx
