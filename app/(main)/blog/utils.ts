@@ -1,13 +1,9 @@
 import fs from 'fs'
 import path from 'path'
-
-type Metadata = {
-  title: string
-  publishedAt: string
-  summary: string
-  cover?: string
-  tags?: string
-}
+import {
+  BlogFrontmatterSchema,
+  type BlogFrontmatter,
+} from '@/content/data/schema'
 
 function parseFrontmatter(fileContent: string) {
   let frontmatterRegex = /---\s*([\s\S]*?)\s*---/
@@ -15,16 +11,18 @@ function parseFrontmatter(fileContent: string) {
   let frontMatterBlock = match![1]
   let content = fileContent.replace(frontmatterRegex, '').trim()
   let frontMatterLines = frontMatterBlock.trim().split('\n')
-  let metadata: Partial<Metadata> = {}
+  let rawMetadata: Record<string, string> = {}
 
   frontMatterLines.forEach((line) => {
     let [key, ...valueArr] = line.split(': ')
     let value = valueArr.join(': ').trim()
     value = value.replace(/^['"](.*)['"]$/, '$1') // Remove quotes
-    metadata[key.trim() as keyof Metadata] = value
+    rawMetadata[key.trim()] = value
   })
 
-  return { metadata: metadata as Metadata, content }
+  const metadata: BlogFrontmatter = BlogFrontmatterSchema.parse(rawMetadata)
+
+  return { metadata, content }
 }
 
 function getMDXFiles(dir: string) {
