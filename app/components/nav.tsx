@@ -62,21 +62,21 @@ export function Navbar({
         initial={shouldAnimateIn ? { opacity: 0, y: -12 } : false}
         animate={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.35, ease: 'easeOut' }}
-        className="flex items-center gap-1 rounded-full border border-black/10 bg-white/70 px-2 py-2 shadow-lg backdrop-blur-md dark:border-white/10 dark:bg-black/50"
+        className="flex items-center gap-1.5 rounded-full border border-black/10 bg-white/70 px-2.5 py-2.5 shadow-lg backdrop-blur-md md:gap-1 md:px-2 md:py-2 dark:border-white/10 dark:bg-black/50"
       >
         <Link
           href={`/${lang}`}
           aria-label={labels.home}
           aria-current={pathname === `/${lang}` ? 'page' : undefined}
           className={cn(
-            'rounded-full p-2 transition-colors hover:bg-black/5 dark:hover:bg-white/10',
+            'rounded-full p-2.5 transition-colors hover:bg-black/5 md:p-2 dark:hover:bg-white/10',
             pathname === `/${lang}` && 'text-red-600',
           )}
         >
-          <Home className="h-5 w-5" />
+          <Home className="h-6 w-6 md:h-5 md:w-5" />
         </Link>
 
-        <div className="mx-1 h-5 w-px bg-black/10 dark:bg-white/10" />
+        <div className="mx-1 h-6 w-px bg-black/10 md:h-5 dark:bg-white/10" />
 
         {links.map(({ href, label, icon: Icon }) => (
           <Link
@@ -85,26 +85,26 @@ export function Navbar({
             aria-label={label}
             aria-current={pathname === href ? 'page' : undefined}
             className={cn(
-              'rounded-full p-2 transition-colors hover:bg-black/5 dark:hover:bg-white/10',
+              'rounded-full p-2.5 transition-colors hover:bg-black/5 md:p-2 dark:hover:bg-white/10',
               pathname === href && 'text-red-600',
             )}
           >
-            <Icon className="h-5 w-5" />
+            <Icon className="h-6 w-6 md:h-5 md:w-5" />
           </Link>
         ))}
 
-        <div className="mx-1 h-5 w-px bg-black/10 dark:bg-white/10" />
+        <div className="mx-1 h-6 w-px bg-black/10 md:h-5 dark:bg-white/10" />
 
         <button
           type="button"
           aria-label="Toggle theme"
           onClick={() => setTheme(resolvedTheme === 'dark' ? 'light' : 'dark')}
-          className="rounded-full p-2 transition-colors hover:bg-black/5 dark:hover:bg-white/10"
+          className="rounded-full p-2.5 transition-colors hover:bg-black/5 md:p-2 dark:hover:bg-white/10"
         >
           {mounted && resolvedTheme === 'dark' ? (
-            <Sun className="h-5 w-5" />
+            <Sun className="h-6 w-6 md:h-5 md:w-5" />
           ) : (
-            <Moon className="h-5 w-5" />
+            <Moon className="h-6 w-6 md:h-5 md:w-5" />
           )}
         </button>
 
@@ -112,7 +112,7 @@ export function Navbar({
           href={otherLocalePath}
           aria-label={`Switch to ${LOCALE_NAMES[otherLocale]}`}
           scroll={false}
-          className="rounded-full px-2 py-2 text-sm font-medium whitespace-nowrap transition-colors hover:bg-black/5 sm:px-3 dark:hover:bg-white/10"
+          className="rounded-full px-3 py-2.5 text-sm font-medium whitespace-nowrap transition-colors hover:bg-black/5 md:px-3 md:py-2 dark:hover:bg-white/10"
         >
           <span className="md:hidden">{LOCALE_NAMES_COMPACT[otherLocale]}</span>
           <span className="hidden md:inline">{LOCALE_NAMES[otherLocale]}</span>
