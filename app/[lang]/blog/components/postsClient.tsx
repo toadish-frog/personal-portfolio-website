@@ -103,7 +103,7 @@ export function BlogPostsClient({
                 <p className="mb-4 w-full truncate text-base text-gray-700 dark:text-gray-300">
                   {post.metadata.summary}
                 </p>
-                <p className="w-full text-blue-500 hover:underline dark:text-red-500">
+                <p className="w-full text-blue-700 hover:underline dark:text-red-400">
                   {readMoreLabel}
                 </p>
               </div>

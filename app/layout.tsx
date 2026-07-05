@@ -41,9 +41,11 @@ export default function RootLayout({
       className={cx(GeistSans.variable, GeistMono.variable)}
     >
       <body className="bg-white text-black antialiased dark:bg-black dark:text-white">
-        <ThemeProvider>
-          <main className="container">{children}</main>
-        </ThemeProvider>
+        {/* No <main> wrapper here — app/[lang]/layout.tsx owns it, wrapping
+            only the actual per-page content (not the nav/footer chrome it
+            renders alongside). app/not-found.tsx (the one page that bypasses
+            [lang]/layout.tsx entirely) provides its own <main>. */}
+        <ThemeProvider>{children}</ThemeProvider>
       </body>
     </html>
   )

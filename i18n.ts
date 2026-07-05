@@ -12,3 +12,20 @@ export const LOCALE_NAMES: Record<Locale, string> = {
   en: 'EN',
   zh: '中文',
 }
+
+// Shared by every fixed-route layout's generateMetadata (home, photos,
+// video, aboutme, blog listing) so each locale's page correctly points to
+// its sibling translations via <link rel="alternate" hreflang="...">,
+// rather than only being discoverable through the sitemap.
+export function localeAlternates(
+  baseUrl: string,
+  currentLocale: Locale,
+  route: string,
+) {
+  return {
+    canonical: `${baseUrl}/${currentLocale}${route}`,
+    languages: Object.fromEntries(
+      LOCALES.map((locale) => [locale, `${baseUrl}/${locale}${route}`]),
+    ),
+  }
+}

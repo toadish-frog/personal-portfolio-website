@@ -1,6 +1,7 @@
 import type { Metadata } from 'next'
 import { getDictionary } from '@/dictionaries'
-import { isValidLocale, type Locale } from '@/i18n'
+import { isValidLocale, localeAlternates, type Locale } from '@/i18n'
+import { baseUrl } from 'app/sitemap'
 
 export async function generateMetadata({
   params,
@@ -13,6 +14,7 @@ export async function generateMetadata({
   return {
     title: dict.pages.video.title,
     description: dict.pages.video.description,
+    alternates: localeAlternates(baseUrl, safeLang, '/video'),
   }
 }
 

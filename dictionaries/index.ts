@@ -23,6 +23,7 @@ export interface Dictionary {
   pages: {
     about: {
       title: string
+      heading: string
       description: string
       countriesHeading: string
       skillsHeading: string

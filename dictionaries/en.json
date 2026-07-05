@@ -26,6 +26,7 @@
   "pages": {
     "about": {
       "title": "About",
+      "heading": "About",
       "description": "Something about myself.",
       "countriesHeading": "Places I've Been",
       "skillsHeading": "Toolbox",

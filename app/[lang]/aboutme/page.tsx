@@ -15,6 +15,7 @@ export default async function Page({
 
   return (
     <section className="page-section">
+      <h1 className="page-heading">{dict.pages.about.heading}</h1>
       <AboutClient
         terminalLines={dict.pages.about.terminal}
         countriesHeading={dict.pages.about.countriesHeading}

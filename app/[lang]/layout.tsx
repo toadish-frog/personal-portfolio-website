@@ -4,7 +4,7 @@ import { HtmlLang } from 'app/components/htmlLang'
 import Footer from 'app/components/footer'
 import { Navbar } from 'app/components/nav'
 import { getDictionary } from '@/dictionaries'
-import { LOCALES, isValidLocale } from '@/i18n'
+import { LOCALES, isValidLocale, localeAlternates } from '@/i18n'
 import { baseUrl } from 'app/sitemap'
 
 export function generateStaticParams() {
@@ -26,6 +26,7 @@ export async function generateMetadata({
       template: '%s',
     },
     description: dict.site.description,
+    alternates: localeAlternates(baseUrl, lang, ''),
     openGraph: {
       title: 'Syang Personal Website',
       description: dict.site.description,
@@ -53,11 +54,9 @@ export default async function LangLayout({
   return (
     <>
       <HtmlLang lang={lang} />
-      <section>
-        <Navbar lang={lang} labels={dict.nav} />
-        {children}
-        <Footer labels={dict.footer} />
-      </section>
+      <Navbar lang={lang} labels={dict.nav} />
+      <main className="container">{children}</main>
+      <Footer labels={dict.footer} />
     </>
   )
 }

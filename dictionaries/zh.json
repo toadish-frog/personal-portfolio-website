@@ -26,6 +26,7 @@
   "pages": {
     "about": {
       "title": "关于",
+      "heading": "关于",
       "description": "一些关于我自己的事。",
       "countriesHeading": "去过的地方",
       "skillsHeading": "技能工具箱",
