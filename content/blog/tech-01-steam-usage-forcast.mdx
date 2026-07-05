@@ -125,7 +125,12 @@ By the look of the series, we can make the conjecture that the series may be of 
 average model type, given its shape.
 
 <div className="img-wrapper">
-    <img src="https://cdn.jsdelivr.net/gh/xya89/picx-images-hosting@master/posts/steam_server_forecast/picX-Number-of-Daily-In.Game-Steam-Useres-over-Time.5xagr8ekn3.9nzmjaz3gr.webp" alt="ACF" />
+    <Image
+    src="https://cdn.jsdelivr.net/gh/xya89/picx-images-hosting@master/posts/steam_server_forecast/picX-Number-of-Daily-In.Game-Steam-Useres-over-Time.5xagr8ekn3.9nzmjaz3gr.webp"
+    alt="ACF"
+    width={1173}
+    height={721}
+/>
 </div>
 
 There also appears to be some annual seasonality happening with the number of in-game players,
@@ -139,7 +144,12 @@ time series of in-game Steam players using the Box-Jenkins method. A line graph 
 can be seen below.
 
 <div className="img-wrapper">
-    <img src="https://cdn.jsdelivr.net/gh/xya89/picx-images-hosting@master/posts/steam_server_forecast/picX-Number-of-Daily-In.Game-Steam-Useres-over-Time---line-+-point.2yy6nq9hlb.7w6noefqkq.webp" alt="ACF" />
+    <Image
+    src="https://cdn.jsdelivr.net/gh/xya89/picx-images-hosting@master/posts/steam_server_forecast/picX-Number-of-Daily-In.Game-Steam-Useres-over-Time---line-+-point.2yy6nq9hlb.7w6noefqkq.webp"
+    alt="ACF"
+    width={1173}
+    height={721}
+/>
 </div>
 The data shows an upwards trend from 2021 to 2022. 
 
@@ -150,13 +160,23 @@ Examination of the ACF, PACF, and
 EACF of the data:
 
 <div className="img-wrapper">
-    <img src="https://cdn.jsdelivr.net/gh/xya89/picx-images-hosting@master/posts/steam_server_forecast/picX-ACF.39l0gvp2lj.6bgwoxij4a.webp" alt="ACF" />
+    <Image
+    src="https://cdn.jsdelivr.net/gh/xya89/picx-images-hosting@master/posts/steam_server_forecast/picX-ACF.39l0gvp2lj.6bgwoxij4a.webp"
+    alt="ACF"
+    width={1173}
+    height={721}
+/>
     ACF(1.1)
 </div>
 
 
 <div className="img-wrapper">
-    <img src="https://cdn.jsdelivr.net/gh/xya89/picx-images-hosting@master/posts/steam_server_forecast/picX-PACF.2a4x3pmbfs.4xudkw7h3g.webp" alt="PACF" />
+    <Image
+    src="https://cdn.jsdelivr.net/gh/xya89/picx-images-hosting@master/posts/steam_server_forecast/picX-PACF.2a4x3pmbfs.4xudkw7h3g.webp"
+    alt="PACF"
+    width={1173}
+    height={721}
+/>
     PACF(1.1)
 </div>
 
@@ -176,9 +196,12 @@ Since the pure stationary MA and AR models can be identified by studying their A
 as the table of Box-Jenkins Identification Tables:
 
 <div className="img-wrapper">
-    <img src="https://cdn.jsdelivr.net/gh/xya89/picx-images-hosting@master/posts/steam_server_forecast/Box-Jenkins-Tables.39l0gwir6l.64dothwdop.webp" 
-    alt="table" 
-    />
+    <Image
+    src="https://cdn.jsdelivr.net/gh/xya89/picx-images-hosting@master/posts/steam_server_forecast/Box-Jenkins-Tables.39l0gwir6l.64dothwdop.webp"
+    alt="table"
+    width={798}
+    height={162}
+/>
     Box-Jenkins Table
 </div>
 
@@ -200,7 +223,12 @@ a stationary transformation. We named the transformed set as steam.log.
 First, we plot the transformed data, and its ACF, PACF.
 
 <div className="img-wrapper">
-    <img src="https://cdn.jsdelivr.net/gh/xya89/picx-images-hosting@master/posts/steam_server_forecast/transformed-plot.escb4f306.3go8j53cco.webp" alt="transformed-plot" />
+    <Image
+    src="https://cdn.jsdelivr.net/gh/xya89/picx-images-hosting@master/posts/steam_server_forecast/transformed-plot.escb4f306.3go8j53cco.webp"
+    alt="transformed-plot"
+    width={1173}
+    height={721}
+/>
     Transformed Plot
 </div>
 
@@ -212,13 +240,23 @@ From the transformed plot, we can see that:
 We need to examine the ACF and PACF.
 
 <div className="img-wrapper">
-    <img src="https://cdn.jsdelivr.net/gh/xya89/picx-images-hosting@master/posts/steam_server_forecast/transformed-ACF.3k7ua29hx0.67xar7pgef.webp" alt="ACF" />
+    <Image
+    src="https://cdn.jsdelivr.net/gh/xya89/picx-images-hosting@master/posts/steam_server_forecast/transformed-ACF.3k7ua29hx0.67xar7pgef.webp"
+    alt="ACF"
+    width={1110}
+    height={683}
+/>
     ACF(2.1)
 </div>
 
 
 <div className="img-wrapper">
-    <img src="https://cdn.jsdelivr.net/gh/xya89/picx-images-hosting@master/posts/steam_server_forecast/transformed-PACF.8hgb3wn9px.49140vjy2v.webp" alt="PACF" />
+    <Image
+    src="https://cdn.jsdelivr.net/gh/xya89/picx-images-hosting@master/posts/steam_server_forecast/transformed-PACF.8hgb3wn9px.49140vjy2v.webp"
+    alt="PACF"
+    width={1110}
+    height={683}
+/>
     PACF(2.1)
 </div>
 
@@ -262,9 +300,12 @@ m1.steam <- arima(steam2$In.Game, order=c(2,1,2),seasonal=list(order=c(0,1,1), p
 <br/>
 
 <div className="img-wrapper">
-    <img src="https://cdn.jsdelivr.net/gh/xya89/picx-images-hosting@master/posts/steam_server_forecast/seansonal-return.7sn1jwkcfs.64dothwdoo.webp" 
-    alt="model" 
-    />
+    <Image
+    src="https://cdn.jsdelivr.net/gh/xya89/picx-images-hosting@master/posts/steam_server_forecast/seansonal-return.7sn1jwkcfs.64dothwdoo.webp"
+    alt="model"
+    width={811}
+    height={156}
+/>
     Seaonal Model 
 </div>
 
@@ -272,23 +313,32 @@ Checking the histogram for standard error residuals, QQ plot for normality, and 
 
 <div className="img-wrapper">
 <br/>
-    <img src="https://cdn.jsdelivr.net/gh/xya89/picx-images-hosting@master/posts/steam_server_forecast/seasonal-residual.2vekq2nc72.7i07xj7fpp.webp" 
-    alt="std.err" 
-    />
+    <Image
+    src="https://cdn.jsdelivr.net/gh/xya89/picx-images-hosting@master/posts/steam_server_forecast/seasonal-residual.2vekq2nc72.7i07xj7fpp.webp"
+    alt="std.err"
+    width={789}
+    height={472}
+/>
     Standard Error for Residuals
 </div>
 <div className="img-wrapper">
 <br/>
-    <img src="https://cdn.jsdelivr.net/gh/xya89/picx-images-hosting@master/posts/steam_server_forecast/steam-forcast-noQQ.6m3qbbb3x7.5j41771xe6.webp" 
-    alt="Normal QQ Plot" 
-    />
+    <Image
+    src="https://cdn.jsdelivr.net/gh/xya89/picx-images-hosting@master/posts/steam_server_forecast/steam-forcast-noQQ.6m3qbbb3x7.5j41771xe6.webp"
+    alt="Normal QQ Plot"
+    width={881}
+    height={497}
+/>
     Normal QQ Plot 
 </div>
 <div className="img-wrapper">
 <br/>
-    <img src="https://cdn.jsdelivr.net/gh/xya89/picx-images-hosting@master/posts/steam_server_forecast/seasonal-ACF.3rb25iwphs.361eurz2th.webp" 
-    alt="Seaonal ACF" 
-    />
+    <Image
+    src="https://cdn.jsdelivr.net/gh/xya89/picx-images-hosting@master/posts/steam_server_forecast/seasonal-ACF.3rb25iwphs.361eurz2th.webp"
+    alt="Seaonal ACF"
+    width={685}
+    height={389}
+/>
     ACF
 </div>
 Acf for the seasonal model, clear that no data lay out side +- 2 sd.
@@ -297,9 +347,12 @@ Acf for the seasonal model, clear that no data lay out side +- 2 sd.
 #### Forecasting
 
 <div className="img-wrapper">
-    <img src="https://cdn.jsdelivr.net/gh/xya89/picx-images-hosting@master/posts/steam_server_forecast/steam-forcasting.8hgbfhl5hi.webp" 
-    alt="forecast" 
-    />
+    <Image
+    src="https://cdn.jsdelivr.net/gh/xya89/picx-images-hosting@master/posts/steam_server_forecast/steam-forcasting.8hgbfhl5hi.webp"
+    alt="forecast"
+    width={464}
+    height={239}
+/>
 </div>
 
 Based on the seasonal ARIMA model we get, we could do a forecasting of the number of
@@ -349,17 +402,23 @@ colMeans(is.na(steam2))
 Forecast data
 <div className="img-wrapper">
 <br/>
-    <img src="https://cdn.jsdelivr.net/gh/xya89/picx-images-hosting@master/posts/steam_server_forecast/steam-forcast-retu.1aotqlmiru.92pyx04n5x.webp" 
-    alt="forecast" 
-    />
+    <Image
+    src="https://cdn.jsdelivr.net/gh/xya89/picx-images-hosting@master/posts/steam_server_forecast/steam-forcast-retu.1aotqlmiru.92pyx04n5x.webp"
+    alt="forecast"
+    width={415}
+    height={246}
+/>
 </div>
 
 Plot
 <div className="img-wrapper">
 <br/>
-    <img src="https://cdn.jsdelivr.net/gh/xya89/picx-images-hosting@master/posts/steam_server_forecast/steam-forcast-plot.2yy6zccxe0.webp" 
-    alt="forecast" 
-    />
+    <Image
+    src="https://cdn.jsdelivr.net/gh/xya89/picx-images-hosting@master/posts/steam_server_forecast/steam-forcast-plot.2yy6zccxe0.webp"
+    alt="forecast"
+    width={768}
+    height={486}
+/>
 </div>
 
 ### Dependencies:

@@ -89,6 +89,23 @@ html {
   @apply m-0;
 }
 
+/* Used by content/blog/*.mdx post bodies (<div className="img-wrapper">,
+   <p className="img-caption">) — a grep across app/components/content .ts(x)
+   files during a Code Review pass missed these, since they only appear in
+   .mdx content, and got deleted as "unused." Restored — see
+   IMPLEMENTATION-SUMMARY.md's "blog images missing" entry. */
+.img-wrapper {
+  @apply mt-6 mb-2 flex justify-center;
+}
+
+.img-wrapper img {
+  @apply block;
+}
+
+.img-caption {
+  @apply block text-center text-sm text-neutral-500 italic dark:text-neutral-400;
+}
+
 .page-section {
   @apply mx-2 mt-8 flex max-w-6xl min-w-0 flex-auto flex-col px-2 antialiased lg:mx-auto lg:px-4;
 }
