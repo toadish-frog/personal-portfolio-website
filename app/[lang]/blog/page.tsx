@@ -15,7 +15,11 @@ export default async function Page({
     <section className="page-section">
       <h1 className="page-heading">{dict.pages.blog.heading}</h1>
 
-      <BlogPosts lang={safeLang} readMoreLabel={dict.pages.blog.readMore} />
+      <BlogPosts
+        lang={safeLang}
+        readMoreLabel={dict.pages.blog.readMore}
+        allTagsLabel={dict.pages.blog.allTags}
+      />
     </section>
   )
 }

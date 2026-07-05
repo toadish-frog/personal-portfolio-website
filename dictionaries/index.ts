@@ -49,6 +49,7 @@ export interface Dictionary {
       heading: string
       description: string
       readMore: string
+      allTags: string
     }
   }
   notFound: { title: string }

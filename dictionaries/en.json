@@ -71,7 +71,8 @@
       "title": "Blog",
       "heading": "Blog",
       "description": "Read my blog.",
-      "readMore": "Read more"
+      "readMore": "Read more",
+      "allTags": "All"
     }
   },
   "notFound": {

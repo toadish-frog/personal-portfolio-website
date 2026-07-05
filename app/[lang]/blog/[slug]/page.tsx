@@ -1,6 +1,8 @@
 import { notFound } from 'next/navigation'
+import Image from 'next/image'
 import { CustomMDX } from 'app/utils/mdx'
-import { formatDate, getBlogPosts } from 'lib/blog'
+import { formatDate } from 'app/utils/formatDate'
+import { getBlogPosts } from 'lib/blog'
 import { baseUrl } from 'app/sitemap'
 import { isValidLocale, type Locale } from '@/i18n'
 
@@ -98,11 +100,16 @@ export default async function Blog({
             }}
           />
           {post.metadata.cover && (
-            <img
-              src={post.metadata.cover}
-              alt={post.metadata.title}
-              className="h-64 w-full object-cover"
-            />
+            <div className="relative h-64 w-full">
+              <Image
+                src={post.metadata.cover}
+                alt={post.metadata.title}
+                fill
+                sizes="100vw"
+                priority
+                className="object-cover"
+              />
+            </div>
           )}
           <div className="p-6">
             <h1 className="title text-2xl font-semibold tracking-tighter">

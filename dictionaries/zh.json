@@ -67,7 +67,8 @@
       "title": "博客",
       "heading": "博客",
       "description": "阅读我的博客。",
-      "readMore": "阅读更多"
+      "readMore": "阅读更多",
+      "allTags": "全部"
     }
   },
   "notFound": {

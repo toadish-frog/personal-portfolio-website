@@ -1,11 +1,12 @@
 import fs from 'fs'
 import path from 'path'
+import { z } from 'zod'
 import {
   BlogFrontmatterSchema,
   type BlogFrontmatter,
 } from '@/content/data/schema'
 
-function parseFrontmatter(fileContent: string) {
+function parseFrontmatter(fileContent: string, sourcePath: string) {
   let frontmatterRegex = /---\s*([\s\S]*?)\s*---/
   let match = frontmatterRegex.exec(fileContent)
   let frontMatterBlock = match![1]
@@ -20,7 +21,16 @@ function parseFrontmatter(fileContent: string) {
     rawMetadata[key.trim()] = value
   })
 
-  const metadata: BlogFrontmatter = BlogFrontmatterSchema.parse(rawMetadata)
+  const result = BlogFrontmatterSchema.safeParse(rawMetadata)
+  if (!result.success) {
+    // Zod's own error has no idea which of the 15+ .mdx files it came from
+    // — surfacing the path here is the difference between a build failure
+    // you can act on and one that sends you grepping through every post.
+    throw new Error(
+      `Invalid frontmatter in ${sourcePath}:\n${z.prettifyError(result.error)}`,
+    )
+  }
+  const metadata: BlogFrontmatter = result.data
 
   return { metadata, content }
 }
@@ -31,7 +41,7 @@ function getMDXFiles(dir: string) {
 
 function readMDXFile(filePath: string) {
   let rawContent = fs.readFileSync(filePath, 'utf-8')
-  return parseFrontmatter(rawContent)
+  return parseFrontmatter(rawContent, filePath)
 }
 
 function getMDXData(dir: string) {
@@ -50,40 +60,4 @@ function getMDXData(dir: string) {
 
 export function getBlogPosts() {
   return getMDXData(path.join(process.cwd(), 'content', 'blog'))
-}
-
-export function formatDate(date: string, includeRelative = false) {
-  let currentDate = new Date()
-  if (!date.includes('T')) {
-    date = `${date}T00:00:00`
-  }
-  let targetDate = new Date(date)
-
-  let yearsAgo = currentDate.getFullYear() - targetDate.getFullYear()
-  let monthsAgo = currentDate.getMonth() - targetDate.getMonth()
-  let daysAgo = currentDate.getDate() - targetDate.getDate()
-
-  let formattedDate = ''
-
-  if (yearsAgo > 0) {
-    formattedDate = `${yearsAgo}y ago`
-  } else if (monthsAgo > 0) {
-    formattedDate = `${monthsAgo}mo ago`
-  } else if (daysAgo > 0) {
-    formattedDate = `${daysAgo}d ago`
-  } else {
-    formattedDate = 'Today'
-  }
-
-  let fullDate = targetDate.toLocaleString('en-us', {
-    month: 'long',
-    day: 'numeric',
-    year: 'numeric',
-  })
-
-  if (!includeRelative) {
-    return fullDate
-  }
-
-  return `${fullDate} (${formattedDate})`
 }
