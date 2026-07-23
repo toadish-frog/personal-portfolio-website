@@ -150,7 +150,7 @@ export default function ImageGallery({
 
             {/* photo-metadata  */}
             <div className="mt-20 flex w-full justify-center px-4">
-              <div className="lg:text-md flex w-full justify-between bg-gradient-to-b from-zinc-800 via-zinc-600 to-stone-600 bg-clip-text text-sm text-transparent lg:w-[90%] dark:from-zinc-400 dark:via-zinc-100 dark:to-stone-300">
+              <div className="lg:text-md flex w-full justify-between bg-linear-to-b from-zinc-800 via-zinc-600 to-stone-600 bg-clip-text text-sm text-transparent lg:w-[90%] dark:from-zinc-400 dark:via-zinc-100 dark:to-stone-300">
                 <div className="flex flex-col text-left">
                   {selectedImage.camera}
                   <br />

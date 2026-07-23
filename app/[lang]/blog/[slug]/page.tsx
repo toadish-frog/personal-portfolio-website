@@ -76,7 +76,7 @@ export default async function Blog({
   return (
     <section className="page-section">
       <div className="lg container mx-auto w-full">
-        <div className="rounded-lg bg-white break-words shadow-md dark:bg-neutral-800">
+        <div className="rounded-lg bg-white wrap-break-words shadow-md dark:bg-neutral-800">
           <script
             type="application/ld+json"
             suppressHydrationWarning

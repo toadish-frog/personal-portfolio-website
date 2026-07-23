@@ -95,7 +95,7 @@ export function AboutClient({
         <h2 className="page-heading mt-0 mb-0 text-center">
           {countriesHeading}
         </h2>
-        <div className="relative h-[28rem] w-full max-w-2xl">
+        <div className="relative h-112 w-full max-w-2xl">
           <World data={globeArcs} globeConfig={globeConfig} />
         </div>
       </section>
