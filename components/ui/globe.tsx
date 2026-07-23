@@ -1,5 +1,5 @@
 'use client'
-import { useEffect, useRef, useState } from 'react'
+import { useEffect, useMemo, useRef, useState } from 'react'
 import { Color, Scene, Fog, PerspectiveCamera, Vector3 } from 'three'
 import ThreeGlobe from 'three-globe'
 import { useThree, Canvas, extend } from '@react-three/fiber'
@@ -30,6 +30,7 @@ type Position = {
   color: string
 }
 
+//TODO: ADD EXPORT ATTRIBUTE
 export type GlobeConfig = {
   pointSize?: number
   globeColor?: string
@@ -249,10 +250,17 @@ export function WebGLRendererConfig() {
 
 export function World(props: WorldProps) {
   const { globeConfig } = props
-  const scene = new Scene()
-  scene.fog = new Fog(0xffffff, 400, 2000)
+  // Scene/camera must stay stable across re-renders (e.g. globeConfig
+  // changing on theme toggle) — recreating them each render was resetting
+  // the camera's aspect ratio, squishing the globe.
+  const scene = useMemo(() => {
+    const s = new Scene()
+    s.fog = new Fog(0xffffff, 400, 2000)
+    return s
+  }, [])
+  const camera = useMemo(() => new PerspectiveCamera(50, aspect, 180, 1800), [])
   return (
-    <Canvas scene={scene} camera={new PerspectiveCamera(50, aspect, 180, 1800)}>
+    <Canvas scene={scene} camera={camera}>
       <WebGLRendererConfig />
       <ambientLight color={globeConfig.ambientLight} intensity={0.6} />
       <directionalLight

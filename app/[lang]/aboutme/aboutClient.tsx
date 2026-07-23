@@ -1,5 +1,7 @@
 'use client'
 import dynamic from 'next/dynamic'
+import { useEffect, useState } from 'react'
+import { useTheme } from 'next-themes'
 import { Terminal } from './components/terminal'
 import type { GlobeConfig } from '@/components/ui/globe'
 import type { GlobeArc, Skill } from '@/content/data/schema'
@@ -13,20 +15,10 @@ const SkillCloud = dynamic(
   { ssr: false },
 )
 
-const globeConfig: GlobeConfig = {
-  pointSize: 4,
-  globeColor: '#062056',
+const SHARED_GLOBE_CONFIG = {
   showAtmosphere: true,
-  atmosphereColor: '#FFFFFF',
+  pointSize: 1,
   atmosphereAltitude: 0.1,
-  emissive: '#062056',
-  emissiveIntensity: 0.1,
-  shininess: 0.9,
-  polygonColor: 'rgba(255,255,255,0.7)',
-  ambientLight: '#38bdf8',
-  directionalLeftLight: '#ffffff',
-  directionalTopLight: '#ffffff',
-  pointLight: '#ffffff',
   arcTime: 1000,
   arcLength: 0.9,
   rings: 1,
@@ -34,6 +26,44 @@ const globeConfig: GlobeConfig = {
   initialPosition: { lat: 49.2827, lng: -123.1207 },
   autoRotate: true,
   autoRotateSpeed: 0.5,
+}
+
+//TODO: FIX COLOUR
+const DARK_GLOBE_CONFIG: GlobeConfig = {
+  ...SHARED_GLOBE_CONFIG,
+
+  globeColor: "#0b0909",
+  atmosphereColor: "#FFFFFF",
+
+  emissive: "#062056",
+  emissiveIntensity: 0.12,
+  shininess: 0.5,
+
+  polygonColor: "rgba(245,245,245,0.72)",
+
+  ambientLight: "#8b0000",
+  directionalLeftLight: "#ffdada",
+  directionalTopLight: "#ffffff",
+  pointLight: "#ff6666",
+}
+
+//TODO: FIX COLOUR
+const LIGHT_GLOBE_CONFIG: GlobeConfig = {
+  ...SHARED_GLOBE_CONFIG,
+
+  globeColor: "#ffffff",
+  atmosphereColor: "#ffffff",
+
+  emissive: "#f6f6f6",
+  emissiveIntensity: 0.12,
+  shininess: 0.5,
+
+  polygonColor: "rgba(48,48,48,0.82)",
+
+  ambientLight: "#ffffff",
+  directionalLeftLight: "#f4f4f4",
+  directionalTopLight: "#ffffff",
+  pointLight: "#ffffff",
 }
 
 export function AboutClient({
@@ -51,6 +81,12 @@ export function AboutClient({
   globeArcs: GlobeArc[]
   skills: Skill[]
 }) {
+  const { resolvedTheme } = useTheme()
+  const [mounted, setMounted] = useState(false)
+  useEffect(() => setMounted(true), [])
+  const globeConfig =
+    mounted && resolvedTheme === 'light' ? LIGHT_GLOBE_CONFIG : DARK_GLOBE_CONFIG
+
   return (
     <div className="flex flex-col items-center gap-16 pb-16">
       <Terminal lines={terminalLines} />
