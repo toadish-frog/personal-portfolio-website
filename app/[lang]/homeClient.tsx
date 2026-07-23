@@ -11,14 +11,6 @@ import { CurrentDateTime } from 'app/utils/currentDateTime'
 const Particles = dynamic(() => import('app/components/particles'), {
   ssr: false,
 })
-const LiquidGlass = dynamic(
-  () => import('./components/liquidGlass').then((mod) => mod.LiquidGlass),
-  { ssr: false },
-)
-const CursorTrace = dynamic(
-  () => import('./components/cursorTrace').then((mod) => mod.CursorTrace),
-  { ssr: false },
-)
 
 export function HomeClient({ tagline }: { tagline: string[] }) {
   const ref1 = useRef(null)
@@ -28,15 +20,11 @@ export function HomeClient({ tagline }: { tagline: string[] }) {
   return (
     <div
       ref={ref1}
-      className={`fade-section relative flex h-screen w-screen flex-col items-center justify-center overflow-hidden ${isVisible ? 'opacity-100' : 'opacity-0'}`}
+      className={`fade-section relative flex h-screen w-full flex-col items-center justify-center overflow-hidden ${isVisible ? 'opacity-100' : 'opacity-0'}`}
     >
-
-      <LiquidGlass className="-z-20" />
-      <CursorTrace className="z-0" />
-
       {!prefersReducedMotion && (
         <Particles
-          className="animate-fade-in absolute inset-0 -z-10"
+          className="animate-fade-in fixed inset-0 -z-10"
           quantity={300}
           color={{ r: 255, g: 10, b: 10 }}
         />
