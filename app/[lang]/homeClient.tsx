@@ -8,7 +8,7 @@ import { CurrentDateTime } from 'app/utils/currentDateTime'
 // Dynamically imported: heavy, purely decorative, and each already gates
 // itself behind prefers-reduced-motion — no reason to ship this JS on the
 // critical path or run it during SSR.
-const Particles = dynamic(() => import('app/components/particles'), {
+const Particles = dynamic(() => import('app/components/ui/particles'), {
   ssr: false,
 })
 
