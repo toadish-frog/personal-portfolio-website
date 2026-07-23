@@ -2,7 +2,6 @@ import { getDictionary } from '@/dictionaries'
 import { resolveLocale } from '@/i18n'
 import { HomeClient } from './homeClient'
 
-
 export default async function Page({
   params,
 }: {

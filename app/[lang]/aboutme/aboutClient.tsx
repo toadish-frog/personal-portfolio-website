@@ -32,38 +32,38 @@ const SHARED_GLOBE_CONFIG = {
 const DARK_GLOBE_CONFIG: GlobeConfig = {
   ...SHARED_GLOBE_CONFIG,
 
-  globeColor: "#0b0909",
-  atmosphereColor: "#FFFFFF",
+  globeColor: '#0b0909',
+  atmosphereColor: '#FFFFFF',
 
-  emissive: "#062056",
+  emissive: '#062056',
   emissiveIntensity: 0.12,
   shininess: 0.5,
 
-  polygonColor: "rgba(245,245,245,0.72)",
+  polygonColor: 'rgba(245,245,245,0.72)',
 
-  ambientLight: "#8b0000",
-  directionalLeftLight: "#ffdada",
-  directionalTopLight: "#ffffff",
-  pointLight: "#ff6666",
+  ambientLight: '#8b0000',
+  directionalLeftLight: '#ffdada',
+  directionalTopLight: '#ffffff',
+  pointLight: '#ff6666',
 }
 
 //TODO: FIX COLOUR
 const LIGHT_GLOBE_CONFIG: GlobeConfig = {
   ...SHARED_GLOBE_CONFIG,
 
-  globeColor: "#ffffff",
-  atmosphereColor: "#ffffff",
+  globeColor: '#ffffff',
+  atmosphereColor: '#ffffff',
 
-  emissive: "#f6f6f6",
+  emissive: '#f6f6f6',
   emissiveIntensity: 0.12,
   shininess: 0.5,
 
-  polygonColor: "rgba(48,48,48,0.82)",
+  polygonColor: 'rgba(48,48,48,0.82)',
 
-  ambientLight: "#ffffff",
-  directionalLeftLight: "#f4f4f4",
-  directionalTopLight: "#ffffff",
-  pointLight: "#ffffff",
+  ambientLight: '#ffffff',
+  directionalLeftLight: '#f4f4f4',
+  directionalTopLight: '#ffffff',
+  pointLight: '#ffffff',
 }
 
 export function AboutClient({
@@ -83,9 +83,12 @@ export function AboutClient({
 }) {
   const { resolvedTheme } = useTheme()
   const [mounted, setMounted] = useState(false)
+  // eslint-disable-next-line react-hooks/set-state-in-effect
   useEffect(() => setMounted(true), [])
   const globeConfig =
-    mounted && resolvedTheme === 'light' ? LIGHT_GLOBE_CONFIG : DARK_GLOBE_CONFIG
+    mounted && resolvedTheme === 'light'
+      ? LIGHT_GLOBE_CONFIG
+      : DARK_GLOBE_CONFIG
 
   return (
     <div className="flex flex-col items-center gap-16 pb-16">

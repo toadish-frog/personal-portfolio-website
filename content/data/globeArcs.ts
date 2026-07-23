@@ -7,7 +7,7 @@ import { GlobeArcListSchema, type GlobeArc } from './schema'
 // Colors cycle through a fixed palette; `order` increments per hop so arcs
 // animate in visited sequence.
 
-const colors = ["#f87171", "#ef4444", "#dc2626"];
+const colors = ['#f87171', '#ef4444', '#dc2626']
 
 const rawGlobeArcs: GlobeArc[] = [
   {
