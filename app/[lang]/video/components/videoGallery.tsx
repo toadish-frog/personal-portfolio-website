@@ -1,7 +1,7 @@
 'use client'
 import { useMemo, useRef, useState } from 'react'
 import { useIsVisible } from 'app/utils/isVisible'
-import { TagFilterBar } from '@/components/ui/tagFilterBar'
+import { TagFilterBar } from 'app/components/tagFilterBar'
 import { videos } from '@/content/data/videos'
 
 const TAG_FILTERS = ['Japan', 'U.S.', 'Winter', 'Outdoors', 'DIY']

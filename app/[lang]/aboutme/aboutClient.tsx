@@ -3,11 +3,11 @@ import dynamic from 'next/dynamic'
 import { useEffect, useState } from 'react'
 import { useTheme } from 'next-themes'
 import { Terminal } from './components/terminal'
-import type { GlobeConfig } from '@/components/ui/globe'
+import type { GlobeConfig } from './components/globe'
 import type { GlobeArc, Skill } from '@/content/data/schema'
 
 const World = dynamic(
-  () => import('@/components/ui/globe').then((mod) => mod.World),
+  () => import('./components/globe').then((mod) => mod.World),
   { ssr: false },
 )
 const SkillCloud = dynamic(

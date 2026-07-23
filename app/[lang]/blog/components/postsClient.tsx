@@ -3,7 +3,7 @@ import { useMemo, useState } from 'react'
 import Link from 'next/link'
 import Image from 'next/image'
 import { formatDate } from 'app/utils/formatDate'
-import { TagFilterBar } from '@/components/ui/tagFilterBar'
+import { TagFilterBar } from 'app/components/tagFilterBar'
 import type { BlogFrontmatter } from '@/content/data/schema'
 import type { Locale } from '@/i18n'
 

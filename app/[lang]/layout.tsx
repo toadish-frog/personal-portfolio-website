@@ -55,7 +55,7 @@ export default async function LangLayout({
     <>
       <HtmlLang lang={lang} />
       <Navbar lang={lang} labels={dict.nav} />
-      <main className="container">{children}</main>
+      <main className="container mx-auto">{children}</main>
       <Footer labels={dict.footer} />
     </>
   )

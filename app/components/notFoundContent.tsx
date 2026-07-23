@@ -1,6 +1,6 @@
 export function NotFoundContent({ title }: { title: string }) {
   return (
-    <section className="mx-2 mt-6 mt-8 flex max-w-6xl min-w-0 flex-auto flex-col px-8 antialiased lg:mx-auto">
+    <section className="mx-2 flex max-w-6xl min-w-0 flex-auto flex-col px-8 antialiased lg:mx-auto">
       <h1 className="mx-auto mt-8 mb-8 text-2xl font-semibold tracking-tighter">
         {title}
       </h1>

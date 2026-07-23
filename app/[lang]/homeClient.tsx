@@ -30,7 +30,6 @@ export function HomeClient({ tagline }: { tagline: string[] }) {
       ref={ref1}
       className={`fade-section relative flex h-screen w-screen flex-col items-center justify-center overflow-hidden ${isVisible ? 'opacity-100' : 'opacity-0'}`}
     >
-      <div className="hidden h-px w-screen md:block" />
 
       <LiquidGlass className="-z-20" />
       <CursorTrace className="z-0" />

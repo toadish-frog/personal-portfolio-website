@@ -3,7 +3,7 @@ import Image from 'next/image'
 import { useEffect, useMemo, useState, useRef } from 'react'
 import { useIsVisible } from 'app/utils/isVisible'
 import { shuffleArray } from 'lib/utils'
-import { TagFilterBar } from '@/components/ui/tagFilterBar'
+import { TagFilterBar } from 'app/components/tagFilterBar'
 import { photos } from '@/content/data/photos'
 import type { Photo } from '@/content/data/schema'
 
