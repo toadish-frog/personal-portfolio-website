@@ -4,7 +4,7 @@ import { useIsVisible } from 'app/utils/isVisible'
 import { TagFilterBar } from 'app/components/tagFilterBar'
 import { videos } from '@/content/data/videos'
 
-const TAG_FILTERS = ['Japan', 'U.S.', 'Winter', 'Outdoors', 'DIY']
+const TAG_FILTERS = ['Random', 'Roadtrip', 'Outdoors']
 
 export function VideoGallery({ noResultsLabel }: { noResultsLabel: string }) {
   const [activeTags, setActiveTags] = useState<string[]>([])

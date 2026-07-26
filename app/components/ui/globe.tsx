@@ -30,7 +30,6 @@ type Position = {
   color: string
 }
 
-//TODO: ADD EXPORT ATTRIBUTE
 export type GlobeConfig = {
   pointSize?: number
   globeColor?: string
@@ -42,6 +41,7 @@ export type GlobeConfig = {
   shininess?: number
   polygonColor?: string
   ambientLight?: string
+  ambientLightIntensity?: number
   directionalLeftLight?: string
   directionalTopLight?: string
   pointLight?: string
@@ -262,7 +262,7 @@ export function World(props: WorldProps) {
   return (
     <Canvas scene={scene} camera={camera}>
       <WebGLRendererConfig />
-      <ambientLight color={globeConfig.ambientLight} intensity={0.6} />
+      <ambientLight color={globeConfig.ambientLight} intensity={globeConfig.ambientLightIntensity || 0.6} />
       <directionalLight
         color={globeConfig.directionalLeftLight}
         position={new Vector3(-400, 100, 400)}

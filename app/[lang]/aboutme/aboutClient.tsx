@@ -17,7 +17,7 @@ const SkillCloud = dynamic(
 
 const SHARED_GLOBE_CONFIG = {
   showAtmosphere: true,
-  pointSize: 1,
+  pointSize: 5,
   atmosphereAltitude: 0.1,
   arcTime: 1000,
   arcLength: 0.9,
@@ -28,39 +28,39 @@ const SHARED_GLOBE_CONFIG = {
   autoRotateSpeed: 0.5,
 }
 
-//TODO: FIX COLOUR
 const DARK_GLOBE_CONFIG: GlobeConfig = {
   ...SHARED_GLOBE_CONFIG,
 
   globeColor: '#0b0909',
-  atmosphereColor: '#FFFFFF',
+  atmosphereColor: '#fff5f5',
 
-  emissive: '#062056',
-  emissiveIntensity: 0.12,
+  emissive: '#170303',
+  emissiveIntensity: 0.15,
   shininess: 0.5,
 
-  polygonColor: 'rgba(245,245,245,0.72)',
+  polygonColor: 'rgba(255,255,255,1)',
 
-  ambientLight: '#8b0000',
-  directionalLeftLight: '#ffdada',
+  ambientLight: '#f5f5f5',
+  ambientLightIntensity: 0.6,
+  directionalLeftLight: '#ffffff',
   directionalTopLight: '#ffffff',
   pointLight: '#ff6666',
 }
 
-//TODO: FIX COLOUR
 const LIGHT_GLOBE_CONFIG: GlobeConfig = {
   ...SHARED_GLOBE_CONFIG,
 
-  globeColor: '#ffffff',
+  globeColor: '#f7f7f7',
   atmosphereColor: '#ffffff',
 
   emissive: '#f6f6f6',
   emissiveIntensity: 0.12,
   shininess: 0.5,
 
-  polygonColor: 'rgba(48,48,48,0.82)',
+  polygonColor: 'rgba(0,0,0,1)',
 
   ambientLight: '#ffffff',
+  ambientLightIntensity: 10,
   directionalLeftLight: '#f4f4f4',
   directionalTopLight: '#ffffff',
   pointLight: '#ffffff',
@@ -98,8 +98,9 @@ export function AboutClient({
         <h2 className="page-heading mt-0 mb-0 text-center">
           {countriesHeading}
         </h2>
-        <div className="relative h-112 w-full max-w-2xl">
+        <div className="relative h-115 md:h-200 w-full">
           <World data={globeArcs} globeConfig={globeConfig} />
+          <div className="pointer-events-none absolute bottom-0 left-0 right-0 h-full z-40 bg-linear-to-b from-transparent to-white dark:to-black" />
         </div>
       </section>
 
