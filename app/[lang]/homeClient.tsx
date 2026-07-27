@@ -24,14 +24,10 @@ export function HomeClient({ tagline }: { tagline: string[] }) {
   const isVisible = useIsVisible(ref1)
   const prefersReducedMotion = usePrefersReducedMotion()
   const { resolvedTheme } = useTheme()
-  // Hydration-safe mount flag: next-themes' pre-hydration script already
-  // stamps the resolved theme class on <html> before React runs, so
-  // resolvedTheme can already be defined on the client's first render even
-  // though the server (no access to that browser-side class/localStorage)
-  // always renders it undefined — a real value mismatch, not just a timing
-  // race. Rendering neither effect until mounted keeps the first client
-  // render identical to the server's, matching the same pattern nav.tsx
-  // uses for its theme toggle icon.
+  // next-themes' pre-hydration script can make resolvedTheme already defined
+  // on the client's first render while the server always renders it
+  // undefined — a real mismatch. Gating on mounted keeps both renders
+  // identical at hydration time, same as nav.tsx's theme icon.
   const [mounted, setMounted] = useState(false)
   // eslint-disable-next-line react-hooks/set-state-in-effect
   useEffect(() => setMounted(true), [])

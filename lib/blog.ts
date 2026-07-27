@@ -59,11 +59,9 @@ function getMDXData(dir: string) {
   })
 }
 
-// [slug]/page.tsx calls this three times per request (generateStaticParams,
-// generateMetadata, and the page component), each of which would otherwise
-// re-read and re-parse every .mdx file from disk just to find one slug.
-// cache() memoizes per-request, so all three share one actual read — file
-// changes are still picked up on the next request, this isn't a stale cache.
+// [slug]/page.tsx calls this 3x per request (generateStaticParams,
+// generateMetadata, page body) — cache() makes them share one actual read
+// instead of re-parsing every .mdx file 3 times per request.
 export const getBlogPosts = cache(() => {
   return getMDXData(path.join(process.cwd(), 'content', 'blog'))
 })

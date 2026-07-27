@@ -1,11 +1,8 @@
 'use client'
 
-// Shared by the photo, video, and blog listing pages — all three had this
-// exact pill-button markup copy-pasted (Phases 5, 6, and 7). Deliberately
-// stays selection-model-agnostic: photos/video do multi-select AND-filtering
-// (`isActive` checks membership in an array), blog does single-select
-// (`isActive` checks equality against one value) — the caller owns that
-// logic entirely, this component only owns how a tag pill looks and behaves.
+// Shared by photo/video/blog listings (was copy-pasted 3x). Selection-model
+// agnostic — photos/video multi-select, blog single-select — the caller owns
+// that logic; this only owns how a tag pill looks and behaves.
 export function TagFilterBar({
   tags,
   isActive,

@@ -1,11 +1,9 @@
 'use client'
 import dynamic from 'next/dynamic'
 
-// The gallery shuffles photos with Math.random() on mount — server-rendering
-// it would shuffle once on the server and again on the client, producing two
-// different orders and a hydration mismatch on every image. Client-only
-// avoids that entirely rather than working around it with a deterministic
-// seed or a post-mount reshuffle flash.
+// Shuffles with Math.random() on mount — SSR would shuffle differently on
+// server vs. client, a hydration mismatch on every image. Client-only avoids
+// it entirely rather than a deterministic seed or reshuffle flash.
 const ImageGallery = dynamic(() => import('./components/imageGallery'), {
   ssr: false,
 })

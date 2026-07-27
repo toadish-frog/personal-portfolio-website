@@ -1,11 +1,8 @@
 import { GlobeArcListSchema, type GlobeArc } from './schema'
 
-// Real travel destinations, connected as a sequential chain in the order
-// visited. Coordinates are city-level (not country centroids), sourced for
-// this list specifically. arcAlt is scaled roughly by hop distance (short
-// regional hops ~0.15, cross-country ~0.2-0.3, intercontinental ~0.4-0.5).
-// Colors cycle through a fixed palette; `order` increments per hop so arcs
-// animate in visited sequence.
+// Real travel destinations, city-level coordinates, chained in visit order.
+// arcAlt scales with hop distance (~0.15 regional, ~0.2-0.3 cross-country,
+// ~0.4-0.5 intercontinental); `order` increments per hop for animation.
 
 const colors = ['#f87171', '#ef4444', '#dc2626']
 

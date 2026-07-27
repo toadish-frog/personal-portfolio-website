@@ -1,12 +1,8 @@
 import { VideoListSchema, type Video } from './schema'
 
-// `tags` is a Phase 6 addition — the original data had no tag field at all,
-// despite the brief explicitly asking for filterable video tags. Populated
-// as a best-effort categorization based only on each video's existing
-// title/alt text (matching the photo gallery's location-tag vocabulary —
-// "Japan"/"U.S." — where a location is actually evident from the text).
-// Not verified against the actual video content; the site owner should
-// review and adjust.
+// `tags` added in Phase 6 (source data had none) — best-effort, derived only
+// from each video's title/alt text. Not verified against actual content;
+// site owner should review.
 const rawVideos: Video[] = [
   {
     src: 'https://res.cloudinary.com/dasffmfcg/video/upload/v1739688444/porfolio/Video/IMG_5998_lafjvg.mov',

@@ -32,16 +32,14 @@ export function CurrentDateTime({
   minutes,
   seconds,
 }: CurrentDateTimeProps) {
-  // Starting from `null` (not `getCurrentDateTime()`) avoids a hydration
-  // mismatch: `new Date()` evaluated during the server render will always
-  // differ from the client's clock by however many seconds the request took,
-  // so the "real" value can only be set once mounted client-side.
+  // Starts null: `new Date()` during SSR always differs from the client's
+  // clock, so the real value can only be set once mounted client-side.
   const [currentDateTime, setCurrentDateTime] = useState<ReturnType<
     typeof getCurrentDateTime
   > | null>(null)
 
   useEffect(() => {
-    // eslint-disable-next-line react-hooks/set-state-in-effect -- see comment above the useState call: this intentionally differs from any server-rendered value
+    // eslint-disable-next-line react-hooks/set-state-in-effect -- intentionally differs from any server-rendered value
     setCurrentDateTime(getCurrentDateTime())
     const intervalId = setInterval(() => {
       setCurrentDateTime(getCurrentDateTime())

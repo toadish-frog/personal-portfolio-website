@@ -109,14 +109,10 @@ export function CustomMDX(props: MDXRemoteProps) {
   return (
     <MDXRemote
       {...props}
-      // next-mdx-remote defaults to stripping every {expression}-valued JSX
-      // attribute (blockJS: true) as an XSS precaution for untrusted MDX —
-      // which silently deleted width={900}/height={500} from every <Image>
-      // in blog post bodies, since those are JS expressions, not string
-      // literals. All content/blog/*.mdx is first-party, not user-submitted,
-      // so that threat model doesn't apply here. blockDangerousJS stays at
-      // its default (true) even with blockJS off, so eval/Function/process
-      // access are still blocked.
+      // next-mdx-remote's default blockJS: true strips {expression}-valued
+      // JSX attributes, silently deleting width={900} etc. from <Image>.
+      // Safe to disable — all content/blog/*.mdx is first-party, not
+      // user-submitted. blockDangerousJS stays at its default.
       options={{ blockJS: false, ...props.options }}
       components={{ ...components, ...(props.components || {}) }}
     />

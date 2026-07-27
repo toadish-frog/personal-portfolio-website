@@ -1,10 +1,7 @@
-// 3D simplex noise, vendored instead of installed: the Aceternity vortex
-// effect this powers pulls `createNoise3D` from the `simplex-noise` npm
-// package, but this repo's constraint is no new third-party dependencies.
-// Algorithm: Stefan Gustavson, "Simplex noise demystified" (2005) — the
-// permutation-table + skewed-simplex-grid method is public domain and widely
-// republished; this is a from-scratch implementation of that algorithm, not
-// code copied from the npm package.
+// 3D simplex noise, vendored instead of installed (vortex.tsx needs it, but
+// `simplex-noise` isn't a dependency here). From-scratch implementation of
+// Stefan Gustavson's public-domain algorithm, not code copied from the npm
+// package.
 
 type Gradient3 = readonly [number, number, number]
 

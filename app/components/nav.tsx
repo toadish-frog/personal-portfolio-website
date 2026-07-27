@@ -9,14 +9,10 @@ import { LOCALE_NAMES, LOCALE_NAMES_COMPACT, type Locale } from '@/i18n'
 import type { Dictionary } from '@/dictionaries'
 import { cn } from 'lib/utils'
 
-// Module scope, not component state: switching locale changes the [lang]
-// route segment's value, which makes Next.js remount everything under
-// app/[lang]/layout.tsx — including this component — even though visually
-// nothing but translated text should change. That remount replayed the
-// entrance animation on every single locale switch. A plain module-level
-// flag (not React state) survives that remount, since navigating
-// client-side never re-evaluates this module — only a hard page reload
-// would reset it, which is exactly when the animation should play again.
+// Module scope, not state: a locale switch remounts everything under
+// app/[lang]/layout.tsx (changed route segment), which replayed the entrance
+// animation every time. Module scope survives that remount; only a hard
+// reload resets it.
 let hasNavAnimatedOnce = false
 
 export function Navbar({

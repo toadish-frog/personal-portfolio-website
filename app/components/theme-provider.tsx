@@ -7,11 +7,9 @@ export function ThemeProvider({ children }: { children: React.ReactNode }) {
       attribute="class"
       defaultTheme="system"
       enableSystem
-      // next-themes injects an inline <script> before hydration to apply the
-      // right theme class pre-paint (avoids a flash of the wrong theme).
-      // React 19 warns about script tags in the component tree; setting
-      // type="text/plain" client-side (after it already ran server-side as
-      // real JS) satisfies both without disabling the FOUC prevention.
+      // next-themes' pre-hydration FOUC-prevention script triggers a React 19
+      // warning; text/plain client-side (after it already ran as real JS
+      // server-side) satisfies it without disabling the fix.
       scriptProps={{
         type: typeof window === 'undefined' ? 'text/javascript' : 'text/plain',
       }}

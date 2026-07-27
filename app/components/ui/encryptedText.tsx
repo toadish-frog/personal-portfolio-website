@@ -1,16 +1,9 @@
 'use client'
 
-// Adapted from Aceternity UI's Encrypted Text effect
-// (https://ui.aceternity.com/components/encrypted-text).
-//
-// The original seeds its initial scramble via Math.random() in a useRef
-// initializer, which also runs during SSR — since the server and the
-// client's independent first render would each roll different random
-// characters, that's a guaranteed hydration mismatch (mismatched text in
-// every character span). Fixed here by starting fully revealed (the real
-// text — deterministic on both server and client) and only kicking off the
-// scramble/reveal cycle in an effect, which runs client-side only, post-
-// mount.
+// Adapted from Aceternity UI's Encrypted Text effect. The original seeds its
+// scramble via Math.random() in a useRef initializer, which also runs during
+// SSR and causes a hydration mismatch — fixed here by starting fully
+// revealed (deterministic) and only scrambling in a post-mount effect.
 
 import { useEffect, useRef, useState } from 'react'
 import { useInView } from 'motion/react'
@@ -61,12 +54,9 @@ export function EncryptedText({
   const ref = useRef<HTMLSpanElement>(null)
   const isInView = useInView(ref, { once: true })
 
-  // Both start deterministic on the server and the client's first render
-  // alike (fully revealed, no scramble chars generated yet) — the effect
-  // below resets them and starts scrambling, but only once mounted
-  // client-side. scrambleChars is state, not a ref, since it directly
-  // drives rendered output (react-hooks/refs disallows reading ref values
-  // during render).
+  // Deterministic on first render (server + client); the effect below
+  // resets and scrambles post-mount. scrambleChars is state, not a ref,
+  // since react-hooks/refs disallows reading ref values during render.
   const [revealCount, setRevealCount] = useState(text.length)
   const [scrambleChars, setScrambleChars] = useState<string[]>(() =>
     Array(text.length).fill(' '),
@@ -80,9 +70,7 @@ export function EncryptedText({
 
     startTimeRef.current = performance.now()
     lastFlipTimeRef.current = startTimeRef.current
-    // Synchronizing local state with visibility becoming true, not a
-    // response to a props/state change React could derive during render.
-    // eslint-disable-next-line react-hooks/set-state-in-effect
+    // eslint-disable-next-line react-hooks/set-state-in-effect -- syncing state to visibility becoming true, not derivable during render
     setScrambleChars(generateGibberishPreservingSpaces(text, charset).split(''))
     setRevealCount(0)
 
