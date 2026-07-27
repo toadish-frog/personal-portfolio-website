@@ -16,13 +16,7 @@ const CURSOR_BLINK_MS = 530
 type Phase = 'typing' | 'executing' | 'outputting' | 'pausing' | 'done'
 
 type TokenType =
-  | 'command'
-  | 'flag'
-  | 'string'
-  | 'number'
-  | 'operator'
-  | 'path'
-  | 'default'
+  'command' | 'flag' | 'string' | 'number' | 'operator' | 'path' | 'default'
 
 interface Token {
   type: TokenType
@@ -127,10 +121,7 @@ export function Terminal({ lines }: { lines: TerminalLine[] }) {
 
   const currentLine = lines[commandIdx]
   const currentCommand = currentLine?.command ?? ''
-  const currentOutputs = useMemo(
-    () => currentLine?.output ?? [],
-    [currentLine],
-  )
+  const currentOutputs = useMemo(() => currentLine?.output ?? [], [currentLine])
   const isLastCommand = commandIdx === lines.length - 1
 
   useEffect(() => {
@@ -229,9 +220,7 @@ export function Terminal({ lines }: { lines: TerminalLine[] }) {
 
   const prompt = (
     <span className="text-neutral-500">
-      <span className="text-emerald-600 dark:text-emerald-400">
-        {USERNAME}
-      </span>
+      <span className="text-emerald-600 dark:text-emerald-400">{USERNAME}</span>
       <span> $</span>{' '}
     </span>
   )

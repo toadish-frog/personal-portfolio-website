@@ -64,7 +64,7 @@ export function BlogPostsClient({
             className="block"
           >
             <div className="card card-hover relative">
-              <div className="pointer-events-none absolute inset-0.5 hidden rounded-[inherit] lg:block z-10">
+              <div className="pointer-events-none absolute inset-0.5 z-10 hidden rounded-[inherit] lg:block">
                 <GlowingEffect
                   spread={40}
                   glow
@@ -74,7 +74,7 @@ export function BlogPostsClient({
                   inactiveZone={0.01}
                 />
               </div>
-              <div className="relative h-48 w-full object-cover z-0">
+              <div className="relative z-0 h-48 w-full object-cover">
                 {post.metadata.cover && (
                   <Image
                     src={post.metadata.cover}

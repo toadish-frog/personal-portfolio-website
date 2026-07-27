@@ -262,7 +262,10 @@ export function World(props: WorldProps) {
   return (
     <Canvas scene={scene} camera={camera}>
       <WebGLRendererConfig />
-      <ambientLight color={globeConfig.ambientLight} intensity={globeConfig.ambientLightIntensity || 0.6} />
+      <ambientLight
+        color={globeConfig.ambientLight}
+        intensity={globeConfig.ambientLightIntensity || 0.6}
+      />
       <directionalLight
         color={globeConfig.directionalLeftLight}
         position={new Vector3(-400, 100, 400)}

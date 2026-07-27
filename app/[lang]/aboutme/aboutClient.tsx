@@ -98,9 +98,9 @@ export function AboutClient({
         <h2 className="page-heading mt-0 mb-0 text-center">
           {countriesHeading}
         </h2>
-        <div className="relative h-115 md:h-200 w-full">
+        <div className="relative h-115 w-full md:h-200">
           <World data={globeArcs} globeConfig={globeConfig} />
-          <div className="pointer-events-none absolute bottom-0 left-0 right-0 h-full z-40 bg-linear-to-b from-transparent to-white dark:to-black" />
+          <div className="pointer-events-none absolute right-0 bottom-0 left-0 z-40 h-full bg-linear-to-b from-transparent to-white dark:to-black" />
         </div>
       </section>
 
