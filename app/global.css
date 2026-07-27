@@ -5,6 +5,26 @@
    media query, so the manual light/dark switch in the nav actually works. */
 @custom-variant dark (&:is(.dark *));
 
+/* Tailwind v4 has no JS config to add `theme.extend.animation` to, so the
+   light-theme Aurora background effect's slow drifting-gradient animation
+   (app/components/ui/aurora.tsx, `after:animate-aurora`) is registered here
+   instead. */
+@theme inline {
+  --animate-aurora: aurora 60s linear infinite;
+  @keyframes aurora {
+    from {
+      background-position:
+        50% 50%,
+        50% 50%;
+    }
+    to {
+      background-position:
+        350% 50%,
+        350% 50%;
+    }
+  }
+}
+
 ::selection {
   background-color: #47a3f3;
   color: #fefefe;

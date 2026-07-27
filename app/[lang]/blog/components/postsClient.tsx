@@ -4,6 +4,7 @@ import Link from 'next/link'
 import Image from 'next/image'
 import { formatDate } from 'app/utils/formatDate'
 import { TagFilterBar } from 'app/components/tagFilterBar'
+import { GlowingEffect } from 'app/components/ui/glowingEffect'
 import type { BlogFrontmatter } from '@/content/data/schema'
 import type { Locale } from '@/i18n'
 
@@ -62,8 +63,18 @@ export function BlogPostsClient({
             href={`/${lang}/blog/${post.slug}`}
             className="block"
           >
-            <div className="card card-hover">
-              <div className="relative h-48 w-full object-cover">
+            <div className="card card-hover relative">
+              <div className="pointer-events-none absolute inset-0.5 hidden rounded-[inherit] lg:block z-10">
+                <GlowingEffect
+                  spread={40}
+                  glow
+                  borderWidth={2}
+                  disabled={false}
+                  proximity={64}
+                  inactiveZone={0.01}
+                />
+              </div>
+              <div className="relative h-48 w-full object-cover z-0">
                 {post.metadata.cover && (
                   <Image
                     src={post.metadata.cover}

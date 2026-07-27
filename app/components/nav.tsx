@@ -62,7 +62,7 @@ export function Navbar({
         initial={shouldAnimateIn ? { opacity: 0, y: -12 } : false}
         animate={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.35, ease: 'easeOut' }}
-        className="flex items-center gap-1.5 rounded-full border border-black/10 bg-white/70 px-2.5 py-2.5 shadow-lg backdrop-blur-[2px] md:gap-1 md:px-2 md:py-2 dark:border-white/10 dark:bg-black/50"
+        className="flex items-center gap-1.25 rounded-full border border-black/10 bg-white/70 px-2.5 py-2.5 shadow-lg backdrop-blur-[2px] md:gap-1 md:px-2 md:py-2 dark:border-white/10 dark:bg-black/50"
       >
         <Link
           href={`/${lang}`}

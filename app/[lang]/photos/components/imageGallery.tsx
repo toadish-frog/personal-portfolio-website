@@ -4,6 +4,7 @@ import { useEffect, useMemo, useState, useRef } from 'react'
 import { useIsVisible } from 'app/utils/isVisible'
 import { shuffleArray } from 'lib/utils'
 import { TagFilterBar } from 'app/components/tagFilterBar'
+import { GlowingEffect } from 'app/components/ui/glowingEffect'
 import { photos } from '@/content/data/photos'
 import type { Photo } from '@/content/data/schema'
 
@@ -94,7 +95,20 @@ export default function ImageGallery({
             className={`grid grid-flow-row grid-cols-1 justify-normal gap-4 md:grid-cols-2 lg:grid-cols-2 ${selectedImage ? 'blur-md brightness-50 grayscale' : ''} `}
           >
             {visibleImages.map((img, index) => (
-              <div key={`${img.src}-${index}`} className="relative h-96 w-full">
+              <div
+                key={`${img.src}-${index}`}
+                className="relative h-96 w-full rounded-xl"
+              >
+                <div className="pointer-events-none absolute inset-0.5 z-10 hidden rounded-[inherit] lg:block">
+                  <GlowingEffect
+                    spread={40}
+                    glow
+                    borderWidth={2}
+                    disabled={false}
+                    proximity={64}
+                    inactiveZone={0.01}
+                  />
+                </div>
                 <div style={{ paddingTop: '75%' /* 4:3 aspect ratio */ }}>
                   <Image
                     src={img.src}
