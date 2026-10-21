@@ -2,7 +2,7 @@ import { getBlogPosts } from 'lib/blog'
 import { LOCALES } from '@/i18n'
 import type { MetadataRoute } from 'next'
 
-export const baseUrl = 'https://yxyang.space'
+export const baseUrl = 'https://www.yxyang.space'
 
 const STATIC_ROUTES = ['', '/blog', '/aboutme', '/photos', '/video']
 

@@ -1,8 +1,7 @@
 import { notFound } from 'next/navigation'
 
-// Catch-all for unmatched [lang] URLs. Without it, Next's automatic 404
-// fallback doesn't reliably carry the x-locale header proxy.ts stamps, so
-// not-found.tsx can't tell which language to render.
+// Catch-all for unmatched [lang] URLs. Without it, they fall through to the
+// root app/not-found.tsx, which bypasses [lang]/layout.tsx (no nav/footer).
 export default function CatchAll() {
   notFound()
 }

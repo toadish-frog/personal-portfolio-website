@@ -1,25 +1,31 @@
 'use client'
-import Image from 'next/image'
 import { useEffect, useMemo, useState, useRef } from 'react'
+import { AnimatePresence, motion, useReducedMotion } from 'motion/react'
 import { useIsVisible } from 'app/utils/isVisible'
-import { shuffleArray } from 'lib/utils'
 import { TagFilterBar } from 'app/components/tagFilterBar'
 import { GlowingEffect } from 'app/components/ui/glowingEffect'
-import { photos } from '@/content/data/photos'
+import { FadeInImage } from './fadeInImage'
 import type { Photo } from '@/content/data/schema'
 
 const TAG_FILTERS = ['Digital', 'Film', 'B&W', 'Color']
 const PAGE_SIZE = 24
+// Grid is 1 column below md, 2 columns above, capped by .page-section's
+// max-w-6xl (1152px). Without `sizes`, `fill` images default to 100vw and
+// desktop downloads roughly twice the pixels it shows.
+const GRID_SIZES = '(min-width: 1152px) 576px, (min-width: 768px) 50vw, 100vw'
+const POPUP_SIZES = '(min-width: 1024px) 70vw, 92vw'
 
 export default function ImageGallery({
+  photos,
   loadMoreLabel,
   noResultsLabel,
 }: {
+  photos: Photo[]
   loadMoreLabel: string
   noResultsLabel: string
 }) {
   const [selectedImage, setSelectedImage] = useState<Photo | null>(null)
-  const [shuffledPhotos] = useState<Photo[]>(() => shuffleArray([...photos]))
+  const reduceMotion = useReducedMotion()
   const [activeTags, setActiveTags] = useState<string[]>(['B&W'])
   const [visibleCount, setVisibleCount] = useState(PAGE_SIZE)
 
@@ -63,11 +69,11 @@ export default function ImageGallery({
   const filteredImages = useMemo(
     () =>
       activeTags.length === 0
-        ? shuffledPhotos
-        : shuffledPhotos.filter((img) =>
+        ? photos
+        : photos.filter((img) =>
             activeTags.every((tag) => img.tags.includes(tag)),
           ),
-    [shuffledPhotos, activeTags],
+    [photos, activeTags],
   )
 
   const visibleImages = filteredImages.slice(0, visibleCount)
@@ -92,12 +98,12 @@ export default function ImageGallery({
         <>
           {/* Main */}
           <div
-            className={`grid grid-flow-row grid-cols-1 justify-normal gap-4 md:grid-cols-2 lg:grid-cols-2 ${selectedImage ? 'blur-md brightness-50 grayscale' : ''} `}
+            className={`grid grid-flow-row grid-cols-1 justify-normal gap-4 transition-[filter] duration-300 md:grid-cols-2 lg:grid-cols-2 ${selectedImage ? 'blur-md brightness-50 grayscale' : ''} `}
           >
             {visibleImages.map((img, index) => (
               <div
                 key={`${img.src}-${index}`}
-                className="relative h-96 w-full rounded-xl"
+                className="relative h-96 w-full rounded-xl bg-stone-200 dark:bg-stone-800"
               >
                 <div className="pointer-events-none absolute inset-0.5 z-10 hidden rounded-[inherit] lg:block">
                   <GlowingEffect
@@ -110,10 +116,11 @@ export default function ImageGallery({
                   />
                 </div>
                 <div style={{ paddingTop: '75%' /* 4:3 aspect ratio */ }}>
-                  <Image
+                  <FadeInImage
                     src={img.src}
                     alt={img.alt}
                     fill
+                    sizes={GRID_SIZES}
                     onClick={() => handleImageClick(img)}
                     loading="lazy"
                     className="rounded-xl object-cover shadow-md"
@@ -137,61 +144,75 @@ export default function ImageGallery({
         </>
       )}
 
-      {selectedImage && (
-        <div className={`fixed inset-0 flex items-center justify-center`}>
-          <div
-            className={`image-popup relative h-3/4 w-11/12 rounded-lg bg-white/90 p-2 md:h-[60%] lg:m-20 lg:mt-10 lg:h-[85%] lg:w-[70%] dark:bg-black/50`}
+      <AnimatePresence>
+        {selectedImage && (
+          <motion.div
+            key="overlay"
+            className="fixed inset-0 flex items-center justify-center"
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+            transition={{ duration: reduceMotion ? 0 : 0.2 }}
           >
-            {/* exit-button-top-right */}
-            <button
-              className="absolute top-2 right-2 text-black dark:text-white"
-              onClick={closeOverlay}
+            <motion.div
+              className={`image-popup relative h-3/4 w-11/12 rounded-lg bg-white/90 p-2 md:h-[60%] lg:m-20 lg:mt-10 lg:h-[85%] lg:w-[70%] dark:bg-black/50`}
+              initial={{ scale: reduceMotion ? 1 : 0.96 }}
+              animate={{ scale: 1 }}
+              exit={{ scale: reduceMotion ? 1 : 0.96 }}
+              transition={{ duration: reduceMotion ? 0 : 0.2, ease: 'easeOut' }}
             >
-              &times;
-            </button>
-            <div className="relative mt-6 flex h-[70%] w-full lg:h-[85%]">
-              <div className="relative h-full w-full">
-                <Image
-                  src={selectedImage.src}
-                  alt={selectedImage.alt}
-                  fill
-                  loading="lazy"
-                  className="object-contain"
-                  onContextMenu={(e) => e.preventDefault()}
-                />
+              {/* exit-button-top-right */}
+              <button
+                className="absolute top-2 right-2 text-black dark:text-white"
+                onClick={closeOverlay}
+              >
+                &times;
+              </button>
+              <div className="relative mt-6 flex h-[70%] w-full lg:h-[85%]">
+                <div className="relative h-full w-full">
+                  <FadeInImage
+                    key={selectedImage.src}
+                    src={selectedImage.src}
+                    alt={selectedImage.alt}
+                    fill
+                    sizes={POPUP_SIZES}
+                    className="object-contain"
+                    onContextMenu={(e) => e.preventDefault()}
+                  />
+                </div>
               </div>
-            </div>
 
-            {/* photo-metadata  */}
-            <div className="mt-20 flex w-full justify-center px-4">
-              <div className="lg:text-md flex w-full justify-between bg-linear-to-b from-zinc-800 via-zinc-600 to-stone-600 bg-clip-text text-sm text-transparent lg:w-[90%] dark:from-zinc-400 dark:via-zinc-100 dark:to-stone-300">
-                <div className="flex flex-col text-left">
-                  {selectedImage.camera}
-                  <br />
-                  {selectedImage.lens}
-                  {selectedImage.isFilm && selectedImage.filmMake && (
-                    <>
-                      <br />
-                      {selectedImage.filmMake}
-                    </>
-                  )}
-                </div>
-                <div className="flex flex-col text-right">
-                  {selectedImage.city}
-                  <br />
-                  {selectedImage.country}
-                  {selectedImage.date && (
-                    <>
-                      <br />
-                      {selectedImage.date}
-                    </>
-                  )}
+              {/* photo-metadata  */}
+              <div className="mt-20 flex w-full justify-center px-4">
+                <div className="lg:text-md flex w-full justify-between bg-linear-to-b from-zinc-800 via-zinc-600 to-stone-600 bg-clip-text text-sm text-transparent lg:w-[90%] dark:from-zinc-400 dark:via-zinc-100 dark:to-stone-300">
+                  <div className="flex flex-col text-left">
+                    {selectedImage.camera}
+                    <br />
+                    {selectedImage.lens}
+                    {selectedImage.isFilm && selectedImage.filmMake && (
+                      <>
+                        <br />
+                        {selectedImage.filmMake}
+                      </>
+                    )}
+                  </div>
+                  <div className="flex flex-col text-right">
+                    {selectedImage.city}
+                    <br />
+                    {selectedImage.country}
+                    {selectedImage.date && (
+                      <>
+                        <br />
+                        {selectedImage.date}
+                      </>
+                    )}
+                  </div>
                 </div>
               </div>
-            </div>
-          </div>
-        </div>
-      )}
+            </motion.div>
+          </motion.div>
+        )}
+      </AnimatePresence>
     </section>
   )
 }

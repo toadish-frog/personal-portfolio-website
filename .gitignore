@@ -42,5 +42,8 @@ next-env.d.ts
 .prompt
 /prompt
 
+# local planning notes
+/docs
+
 # agent settings
 .claude

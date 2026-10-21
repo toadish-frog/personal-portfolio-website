@@ -1,6 +1,8 @@
-import { PhotosClient } from './photosClient'
+import ImageGallery from './components/imageGallery'
 import { getDictionary } from '@/dictionaries'
 import { resolveLocale } from '@/i18n'
+import { photos } from '@/content/data/photos'
+import { shuffleArray } from 'lib/utils'
 
 export default async function Page({
   params,
@@ -34,7 +36,12 @@ export default async function Page({
         </div>
       </div>
 
-      <PhotosClient
+      {/* Shuffled on the server and passed down, so the prerendered HTML
+          already holds the grid and the client hydrates the same order
+          (a client-side shuffle would mismatch). The order changes on
+          each build. */}
+      <ImageGallery
+        photos={shuffleArray([...photos])}
         loadMoreLabel={dict.pages.photos.loadMore}
         noResultsLabel={dict.pages.photos.noResults}
       />

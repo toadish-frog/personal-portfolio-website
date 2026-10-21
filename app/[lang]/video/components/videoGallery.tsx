@@ -6,6 +6,21 @@ import { videos } from '@/content/data/videos'
 
 const TAG_FILTERS = ['Random', 'Roadtrip', 'Outdoors']
 
+// Interim until video moves to R2 + HLS.
+// The originals are raw 3-75 MB uploads (some iPhone .mov), so playback uses
+// a 1280px H.264 rendition and a poster frame that Cloudinary derives from
+// each original. Both were pre-generated: a transform's first request
+// returns 423 while Cloudinary processes it, so changing a transform string
+// means warming the new URLs again before deploying.
+const UPLOAD_PATH = '/video/upload/'
+const PLAYBACK_TRANSFORM = 'vc_h264,w_1280,q_auto'
+const POSTER_TRANSFORM = 'so_1,w_1280,q_auto'
+
+function cloudinaryDerived(src: string, transform: string, ext: string) {
+  const [origin, path = ''] = src.split(UPLOAD_PATH)
+  return `${origin}${UPLOAD_PATH}${transform}/${path.replace(/\.\w+$/, `.${ext}`)}`
+}
+
 export function VideoGallery({ noResultsLabel }: { noResultsLabel: string }) {
   const [activeTags, setActiveTags] = useState<string[]>([])
   const refAll = useRef(null)
@@ -61,10 +76,12 @@ export function VideoGallery({ noResultsLabel }: { noResultsLabel: string }) {
               }}
             >
               <video
-                src={vid.src}
+                src={cloudinaryDerived(vid.src, PLAYBACK_TRANSFORM, 'mp4')}
+                poster={cloudinaryDerived(vid.src, POSTER_TRANSFORM, 'jpg')}
                 controls
                 // No autoplay-on-mount cost: the browser won't fetch any
-                // video bytes until the user actually presses play.
+                // video bytes until the user actually presses play; the
+                // poster fills the frame until then.
                 preload="none"
                 // Required on iOS Safari — without it, tapping play forces
                 // fullscreen instead of playing inline.

@@ -19,7 +19,7 @@ const contentSecurityPolicy = [
   "default-src 'self'",
   "script-src 'self' 'unsafe-inline' 'unsafe-eval'",
   "style-src 'self' 'unsafe-inline'",
-  "img-src 'self' data:",
+  "img-src 'self' data: https://res.cloudinary.com",
   "font-src 'self' data:",
   "media-src 'self' https://res.cloudinary.com",
   "connect-src 'self'",
