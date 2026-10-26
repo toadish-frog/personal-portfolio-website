@@ -34,4 +34,7 @@ jobs:
 
       - run: npm run format:check
 
+      # The photos and video pages fetch from the CMS at build time.
       - run: npm run build
+        env:
+          CMS_API_URL: https://api.yxyang.space

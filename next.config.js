@@ -19,9 +19,11 @@ const contentSecurityPolicy = [
   "default-src 'self'",
   "script-src 'self' 'unsafe-inline' 'unsafe-eval'",
   "style-src 'self' 'unsafe-inline'",
-  "img-src 'self' data: https://res.cloudinary.com",
+  // media.yxyang.space: CMS video posters and videos. CMS photos load
+  // through /_next/image, which 'self' already covers.
+  "img-src 'self' data: https://media.yxyang.space",
   "font-src 'self' data:",
-  "media-src 'self' https://res.cloudinary.com",
+  "media-src 'self' https://media.yxyang.space",
   "connect-src 'self'",
   "frame-ancestors 'none'",
   "base-uri 'self'",
@@ -49,6 +51,11 @@ module.exports = {
       {
         protocol: 'https',
         hostname: 'cdn.jsdelivr.net',
+      },
+      {
+        protocol: 'https',
+        hostname: 'media.yxyang.space',
+        pathname: '/photos/**',
       },
     ],
     minimumCacheTTL: 60,

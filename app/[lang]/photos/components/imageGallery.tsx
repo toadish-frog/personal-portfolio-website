@@ -1,11 +1,18 @@
 'use client'
-import { useEffect, useMemo, useState, useRef } from 'react'
+import {
+  useEffect,
+  useMemo,
+  useState,
+  useRef,
+  useSyncExternalStore,
+} from 'react'
 import { AnimatePresence, motion, useReducedMotion } from 'motion/react'
 import { useIsVisible } from 'app/utils/isVisible'
 import { TagFilterBar } from 'app/components/tagFilterBar'
 import { GlowingEffect } from 'app/components/ui/glowingEffect'
 import { FadeInImage } from './fadeInImage'
 import type { Photo } from '@/content/data/schema'
+import { thumbHashStyle } from 'lib/thumbhash'
 
 const TAG_FILTERS = ['Digital', 'Film', 'B&W', 'Color']
 const PAGE_SIZE = 24
@@ -14,6 +21,8 @@ const PAGE_SIZE = 24
 // desktop downloads roughly twice the pixels it shows.
 const GRID_SIZES = '(min-width: 1152px) 576px, (min-width: 768px) 50vw, 100vw'
 const POPUP_SIZES = '(min-width: 1024px) 70vw, 92vw'
+
+const noopSubscribe = () => () => {}
 
 export default function ImageGallery({
   photos,
@@ -25,7 +34,16 @@ export default function ImageGallery({
   noResultsLabel: string
 }) {
   const [selectedImage, setSelectedImage] = useState<Photo | null>(null)
+  // src of the popup photo once loaded; its placeholder is then removed, as
+  // the ThumbHash shape is approximate and its edges would show around it
+  const [popupLoaded, setPopupLoaded] = useState<string | null>(null)
   const reduceMotion = useReducedMotion()
+  // false while prerendering and hydrating, true afterwards
+  const hydrated = useSyncExternalStore(
+    noopSubscribe,
+    () => true,
+    () => false,
+  )
   const [activeTags, setActiveTags] = useState<string[]>(['B&W'])
   const [visibleCount, setVisibleCount] = useState(PAGE_SIZE)
 
@@ -104,6 +122,7 @@ export default function ImageGallery({
               <div
                 key={`${img.src}-${index}`}
                 className="relative h-96 w-full rounded-xl bg-stone-200 dark:bg-stone-800"
+                style={thumbHashStyle(img.thumbhash, 'cover', hydrated)}
               >
                 <div className="pointer-events-none absolute inset-0.5 z-10 hidden rounded-[inherit] lg:block">
                   <GlowingEffect
@@ -169,13 +188,21 @@ export default function ImageGallery({
                 &times;
               </button>
               <div className="relative mt-6 flex h-[70%] w-full lg:h-[85%]">
-                <div className="relative h-full w-full">
+                <div
+                  className="relative h-full w-full"
+                  style={
+                    popupLoaded === selectedImage.src
+                      ? undefined
+                      : thumbHashStyle(selectedImage.thumbhash, 'contain', true)
+                  }
+                >
                   <FadeInImage
                     key={selectedImage.src}
                     src={selectedImage.src}
                     alt={selectedImage.alt}
                     fill
                     sizes={POPUP_SIZES}
+                    onLoad={() => setPopupLoaded(selectedImage.src)}
                     className="object-contain"
                     onContextMenu={(e) => e.preventDefault()}
                   />

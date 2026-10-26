@@ -30,6 +30,7 @@
     "tailwind-merge": "^3.6.0",
     "tailwindcss": "^4.3.2",
     "three-globe": "^2.45.2",
+    "thumbhash": "^0.1.1",
     "zod": "^4.4.3"
   },
   "devDependencies": {
