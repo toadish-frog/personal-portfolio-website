@@ -58,8 +58,6 @@ module.exports = {
         pathname: '/photos/**',
       },
     ],
-    // 85: photo popup (imageGallery.tsx POPUP_QUALITY)
-    qualities: [75, 85],
     minimumCacheTTL: 60,
   },
   async headers() {

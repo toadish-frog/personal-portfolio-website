@@ -21,9 +21,6 @@ const PAGE_SIZE = 24
 // desktop downloads roughly twice the pixels it shows.
 const GRID_SIZES = '(min-width: 1152px) 576px, (min-width: 768px) 50vw, 100vw'
 const POPUP_SIZES = '(min-width: 1024px) 70vw, 92vw'
-// CMS photos are at most 2,048 px, so the popup is often shown 1:1 or
-// enlarged on high-density screens; 75 shows compression marks there.
-const POPUP_QUALITY = 85
 
 const noopSubscribe = () => () => {}
 
@@ -205,7 +202,6 @@ export default function ImageGallery({
                     alt={selectedImage.alt}
                     fill
                     sizes={POPUP_SIZES}
-                    quality={POPUP_QUALITY}
                     onLoad={() => setPopupLoaded(selectedImage.src)}
                     className="object-contain"
                     onContextMenu={(e) => e.preventDefault()}
