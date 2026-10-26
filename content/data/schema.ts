@@ -18,6 +18,9 @@ export const PhotoSchema = z.object({
   isFilm: z.boolean(),
   filmMake: z.string(),
   tags: z.array(z.string()),
+  // CMS-only fields; today's photos.ts entries have none of them.
+  id: z.string().optional(),
+  thumbhash: z.string().optional(), // base64
 })
 export type Photo = z.infer<typeof PhotoSchema>
 export const PhotoListSchema = z.array(PhotoSchema)
@@ -27,6 +30,11 @@ export const VideoSchema = z.object({
   alt: z.string(),
   title: z.string(),
   tags: z.array(z.string()),
+  // CMS-only fields; today's videos.ts entries have none of them.
+  id: z.string().optional(),
+  poster: z.string().url().optional(),
+  width: z.number().optional(),
+  height: z.number().optional(),
 })
 export type Video = z.infer<typeof VideoSchema>
 export const VideoListSchema = z.array(VideoSchema)

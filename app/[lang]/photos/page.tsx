@@ -1,7 +1,7 @@
 import ImageGallery from './components/imageGallery'
 import { getDictionary } from '@/dictionaries'
 import { resolveLocale } from '@/i18n'
-import { photos } from '@/content/data/photos'
+import { getPhotos } from 'lib/media'
 import { shuffleArray } from 'lib/utils'
 
 export default async function Page({
@@ -12,6 +12,7 @@ export default async function Page({
   const { lang } = await params
   const safeLang = resolveLocale(lang)
   const dict = await getDictionary(safeLang)
+  const photos = await getPhotos()
 
   return (
     <section className="page-section">
@@ -39,9 +40,9 @@ export default async function Page({
       {/* Shuffled on the server and passed down, so the prerendered HTML
           already holds the grid and the client hydrates the same order
           (a client-side shuffle would mismatch). The order changes on
-          each build. */}
+          each build and each revalidation. */}
       <ImageGallery
-        photos={shuffleArray([...photos])}
+        photos={shuffleArray(photos)}
         loadMoreLabel={dict.pages.photos.loadMore}
         noResultsLabel={dict.pages.photos.noResults}
       />
