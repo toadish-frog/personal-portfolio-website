@@ -21,6 +21,9 @@ const PAGE_SIZE = 24
 // desktop downloads roughly twice the pixels it shows.
 const GRID_SIZES = '(min-width: 1152px) 576px, (min-width: 768px) 50vw, 100vw'
 const POPUP_SIZES = '(min-width: 1024px) 70vw, 92vw'
+// CMS photos are at most 2,048 px, so the popup is often shown 1:1 or
+// enlarged on high-density screens; 75 shows compression marks there.
+const POPUP_QUALITY = 85
 
 const noopSubscribe = () => () => {}
 
@@ -34,6 +37,9 @@ export default function ImageGallery({
   noResultsLabel: string
 }) {
   const [selectedImage, setSelectedImage] = useState<Photo | null>(null)
+  // src of the popup photo once loaded; its placeholder is then removed, as
+  // the ThumbHash shape is approximate and its edges would show around it
+  const [popupLoaded, setPopupLoaded] = useState<string | null>(null)
   const reduceMotion = useReducedMotion()
   // false while prerendering and hydrating, true afterwards
   const hydrated = useSyncExternalStore(
@@ -187,11 +193,11 @@ export default function ImageGallery({
               <div className="relative mt-6 flex h-[70%] w-full lg:h-[85%]">
                 <div
                   className="relative h-full w-full"
-                  style={thumbHashStyle(
-                    selectedImage.thumbhash,
-                    'contain',
-                    true,
-                  )}
+                  style={
+                    popupLoaded === selectedImage.src
+                      ? undefined
+                      : thumbHashStyle(selectedImage.thumbhash, 'contain', true)
+                  }
                 >
                   <FadeInImage
                     key={selectedImage.src}
@@ -199,6 +205,8 @@ export default function ImageGallery({
                     alt={selectedImage.alt}
                     fill
                     sizes={POPUP_SIZES}
+                    quality={POPUP_QUALITY}
+                    onLoad={() => setPopupLoaded(selectedImage.src)}
                     className="object-contain"
                     onContextMenu={(e) => e.preventDefault()}
                   />
